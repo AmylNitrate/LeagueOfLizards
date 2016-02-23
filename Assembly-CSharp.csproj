@@ -45,16 +45,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\DataManagement\InitializePlayer.cs" />
-     <Compile Include="Assets\Scripts\DataManagement\PlayerEntity.cs" />
-     <Compile Include="Assets\Scripts\DataManagement\QuizEntity.cs" />
-     <Compile Include="Assets\Scripts\DataManagement\TableManager.cs" />
      <Compile Include="Assets\Scripts\InfiniteScroll.cs" />
      <Compile Include="Assets\Scripts\OpenURL.cs" />
      <Compile Include="Assets\Scripts\QuizAnswer.cs" />
      <Compile Include="Assets\Scripts\QuizBrain.cs" />
      <Compile Include="Assets\Scripts\QuizQuestion.cs" />
-     <None Include="Assets\Scripts\DataManagement\DataManagementREADME.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
