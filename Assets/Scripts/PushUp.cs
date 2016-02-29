@@ -21,7 +21,7 @@ public class PushUp : MonoBehaviour
         timeLeft -= Time.deltaTime;
         if (timeLeft < 0)
         {
-            SceneManager.LoadScene("Menu");
+            SceneManager.LoadScene("MiniGameMenu");
         }
 
         foreach (AnimationState state in anim)
