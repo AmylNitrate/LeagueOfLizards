@@ -45,8 +45,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Bar.cs" />
+     <Compile Include="Assets\Scripts\Dewlap.cs" />
      <Compile Include="Assets\Scripts\InfiniteScroll.cs" />
      <Compile Include="Assets\Scripts\OpenURL.cs" />
+     <Compile Include="Assets\Scripts\PushUp.cs" />
      <Compile Include="Assets\Scripts\QuizAnswer.cs" />
      <Compile Include="Assets\Scripts\QuizBrain.cs" />
      <Compile Include="Assets\Scripts\QuizQuestion.cs" />
