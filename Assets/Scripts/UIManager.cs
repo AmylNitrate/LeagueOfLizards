@@ -10,6 +10,11 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene(Level);
     }
 
+    public void ExitApp()
+    {
+        Application.Quit();
+    }
+
     // Use this for initialization
     void Start ()
     {
