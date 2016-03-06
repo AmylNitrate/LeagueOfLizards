@@ -10,7 +10,6 @@ public class Bar : MonoBehaviour
     bool Down;
     bool Up;
     public bool Good;
-
     float speed;
     // Use this for initialization
     void Start ()
@@ -18,19 +17,24 @@ public class Bar : MonoBehaviour
         speed = (float)0.1;
         Down = true;
         Good = false;
+
     }
 	
 	// Update is called once per frame
-	void Update () {
-        //Debug.Log(gameObject.transform.position.z);
-        if (Down)
+	void Update ()
+    {
+        if (GameObject.Find("Lizard").GetComponent<PushUp>().stop == false)
         {
-            gameObject.transform.Translate(0, 0, -speed);
-            
-        }
-        else if(!Down)
-        {
-            gameObject.transform.Translate(0, 0, speed);
+            //Debug.Log(gameObject.transform.position.z);
+            if (Down)
+            {
+                gameObject.transform.Translate(0, 0, -speed);
+
+            }
+            else if (!Down)
+            {
+                gameObject.transform.Translate(0, 0, speed);
+            }
         }
 
 
