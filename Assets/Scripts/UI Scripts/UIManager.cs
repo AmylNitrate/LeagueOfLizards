@@ -33,7 +33,7 @@ public class UIManager : MonoBehaviour
       
 	void Update ()
     {
-        textRef1.text = "Energy = " + Data.control.energy;
+        textRef1.text = "" + Data.control.energy;
 
     }
 
