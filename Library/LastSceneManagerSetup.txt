@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
-- path: Assets/Scenes/Horizontal/RoundOne.unity
-=======
-- path: Assets/Scenes/Horizontal/Menu.unity
->>>>>>> 099ee96e8758e704d188bd0593e7a68fdd39f21a
+- path: Assets/Scenes/Horizontal/StatMenu.unity
   isLoaded: 1
   isActive: 1

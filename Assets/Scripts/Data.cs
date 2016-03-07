@@ -20,10 +20,11 @@ public class Data : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update ()
+    void Update ()
+   
     {
-        textRef1.text = "Energy = " + energy;
-        textRef2.text = "Upgrade Points = " + upgradePoints;
-	}
+        textRef1.text = "" + energy;
+        textRef2.text = "" + upgradePoints;
+    }
 
 }

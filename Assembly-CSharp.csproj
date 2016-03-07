@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Bar.cs" />
+     <Compile Include="Assets\Scripts\Data.cs" />
      <Compile Include="Assets\Scripts\Dewlap.cs" />
      <Compile Include="Assets\Scripts\InfiniteScroll.cs" />
      <Compile Include="Assets\Scripts\OpenURL.cs" />
