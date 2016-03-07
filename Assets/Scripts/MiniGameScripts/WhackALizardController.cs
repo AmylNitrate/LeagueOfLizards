@@ -14,7 +14,7 @@ public class WhackALizardController : MonoBehaviour
     public float baseSpawnTime;
     float spawnTime;
 
-    int points;
+    public int points;
 
     void Awake()
     {
@@ -28,7 +28,6 @@ public class WhackALizardController : MonoBehaviour
         if (spawnTime <= 0)
         {
             Spawn();
-            GetRandomSpawnTime();
         }
         else
         {
@@ -43,15 +42,27 @@ public class WhackALizardController : MonoBehaviour
 
     void Spawn()
     {
-        Vector3 pos = spawnPoints[Random.Range(0, spawnPoints.Count)].transform.position;
-        bool spawnTail = (Random.Range(0, 2) == 1) ? true : false;
-        if (spawnTail)
+        GameObject temp = spawnPoints[Random.Range(0, spawnPoints.Count)];
+        Vector3 pos = temp.transform.position;
+        GameObject tempLiz;
+        if (temp.GetComponent<WhackHole>().isOccupied)
         {
-            Instantiate(tail, pos, Quaternion.identity);
+            Spawn();
         }
         else
         {
-            Instantiate(lizard, pos, Quaternion.identity);
+            bool spawnTail = (Random.Range(0, 4) == 1) ? true : false;
+            if (spawnTail)
+            {
+                tempLiz = Instantiate(tail, pos, Quaternion.identity) as GameObject;
+            }
+            else
+            {
+                tempLiz = Instantiate(lizard, pos, Quaternion.identity) as GameObject;
+            }
+            tempLiz.GetComponent<WhackLizard>().Init(temp);
+            temp.GetComponent<WhackHole>().isOccupied = true;
+            GetRandomSpawnTime();
         }
     }
 }
