@@ -17,7 +17,7 @@ public class StatMenuUI : MonoBehaviour
     void Update()
     {
 
-        textRef1.text = "Energy = " + Data.control.energy;
-        textRef2.text = "Upgrade Points = " + Data.control.upgradePoints;
+        textRef1.text = "" + Data.control.energy;
+        textRef2.text = "" + Data.control.upgradePoints;
     }
 }
