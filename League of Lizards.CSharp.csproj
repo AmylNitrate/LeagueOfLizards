@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Web v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>WebPlayer:6</UnityBuildTarget>
     <UnityVersion>5.3.1f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -68,14 +66,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Bar.cs" />
+    <Compile Include="Assets\Scripts\Dewlap.cs" />
     <Compile Include="Assets\Scripts\InfiniteScroll.cs" />
     <Compile Include="Assets\Scripts\OpenURL.cs" />
+    <Compile Include="Assets\Scripts\PushUp.cs" />
     <Compile Include="Assets\Scripts\QuizAnswer.cs" />
     <Compile Include="Assets\Scripts\QuizBrain.cs" />
     <Compile Include="Assets\Scripts\QuizQuestion.cs" />
     <Compile Include="Assets\Scripts\UIManager.cs" />
     <Compile Include="Assets\Scripts\WhackALizardController.cs" />
     <Compile Include="Assets\Scripts\WhackHole.cs" />
+    <Compile Include="Assets\Scripts\WhackLizard.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
