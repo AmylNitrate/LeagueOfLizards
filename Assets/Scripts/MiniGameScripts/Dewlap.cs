@@ -14,10 +14,15 @@ public class Dewlap : MonoBehaviour
     bool stop;
 
     private Text textRef2;
+    private Text textRef3;
+
+
     // Use this for initialization
     void Start ()
     {
+        Data.control.points = 0;
         textRef2 = GameObject.Find("Timer").GetComponent<Text>();
+        textRef3 = GameObject.Find("Points").GetComponent<Text>();
         stop = false;
 	}
 
@@ -32,6 +37,7 @@ public class Dewlap : MonoBehaviour
             {
                 stop = true;
                 gameOver.SetActive(true);
+
             }
 
             dewlap.transform.Translate((float)-0.01, (float)0.01, 0);
@@ -49,6 +55,7 @@ public class Dewlap : MonoBehaviour
         }
 
         textRef2.text = "Timer = " + (int)timeLeft;
+        textRef3.text = "Points = " + Data.control.points;
 
     }
 

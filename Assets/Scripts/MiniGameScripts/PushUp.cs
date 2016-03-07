@@ -12,12 +12,16 @@ public class PushUp : MonoBehaviour
     public GameObject gameOver;
 
     private Text textRef2;
+    private Text textRef3;
+
 
     void Start()
     {
+        Data.control.points = 0;
         anim = GetComponent<Animation>();
         stop = false;
         textRef2 = GameObject.Find("Timer").GetComponent<Text>();
+        textRef3 = GameObject.Find("Points").GetComponent<Text>();
     }
 
     void Update()
@@ -31,6 +35,7 @@ public class PushUp : MonoBehaviour
             {
                 stop = true;
                 gameOver.SetActive(true);
+
             }
 
             foreach (AnimationState state in anim)
@@ -45,10 +50,12 @@ public class PushUp : MonoBehaviour
                 if (GameObject.Find("bar").GetComponent<Bar>().Good)
                 {
                     Data.control.energy -= 1;
+                    Data.control.points += 2;
                 }
                 if (!GameObject.Find("bar").GetComponent<Bar>().Good)
                 {
                     Data.control.energy -= 2;
+                    Data.control.points += 1;
                 }
             }
             if (Input.GetMouseButtonUp(0))
@@ -56,6 +63,7 @@ public class PushUp : MonoBehaviour
         }
 
         textRef2.text = "Timer = " + (int)timeLeft;
+        textRef3.text = "Points = " + Data.control.points;
     }
 
 

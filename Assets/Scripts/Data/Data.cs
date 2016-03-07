@@ -12,6 +12,7 @@ public class Data : MonoBehaviour {
 
     public int energy;
     public int upgradePoints;
+    public int points;
 
 	// Use this for initialization
 	void Awake ()
@@ -36,6 +37,7 @@ public class Data : MonoBehaviour {
         PlayerData _data = new PlayerData();
         _data.energy = energy;
         _data.upgradePoints = upgradePoints;
+        _data.points = points;
 
         bf.Serialize(file, _data);
         file.Close();
@@ -52,6 +54,7 @@ public class Data : MonoBehaviour {
 
             energy = _data.energy;
             upgradePoints = _data.upgradePoints;
+            points = _data.points;
         }
     }
 
@@ -62,4 +65,5 @@ class PlayerData
 {
     public int energy;
     public int upgradePoints;
+    public int points;
 }

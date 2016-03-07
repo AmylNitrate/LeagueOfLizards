@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\QuizAnswer.cs" />
     <Compile Include="Assets\Scripts\QuizBrain.cs" />
     <Compile Include="Assets\Scripts\QuizQuestion.cs" />
+    <Compile Include="Assets\Scripts\UI Scripts\MiniGMenuUI.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\StatMenuUI.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\UIManager.cs" />
     <Compile Include="Assets\Scripts\WhackLizard.cs" />
