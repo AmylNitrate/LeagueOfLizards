@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
-- path: Assets/Scenes/Horizontal/MiniGameMenu.unity
-=======
 - path: Assets/Scenes/Horizontal/RoundThree.unity
->>>>>>> 0c1f2022a175ab92688397971a3ec21d46c3b650
   isLoaded: 1
   isActive: 1
