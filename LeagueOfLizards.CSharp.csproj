@@ -61,16 +61,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Bar.cs" />
-    <Compile Include="Assets\Scripts\Data.cs" />
-    <Compile Include="Assets\Scripts\Dewlap.cs" />
+    <Compile Include="Assets\Scripts\Data\Data.cs" />
     <Compile Include="Assets\Scripts\InfiniteScroll.cs" />
+    <Compile Include="Assets\Scripts\MiniGameScripts\Bar.cs" />
+    <Compile Include="Assets\Scripts\MiniGameScripts\Dewlap.cs" />
+    <Compile Include="Assets\Scripts\MiniGameScripts\PushUp.cs" />
+    <Compile Include="Assets\Scripts\MiniGameScripts\WhackALizardController.cs" />
+    <Compile Include="Assets\Scripts\MiniGameScripts\WhackHole.cs" />
     <Compile Include="Assets\Scripts\OpenURL.cs" />
-    <Compile Include="Assets\Scripts\PushUp.cs" />
     <Compile Include="Assets\Scripts\QuizAnswer.cs" />
     <Compile Include="Assets\Scripts\QuizBrain.cs" />
     <Compile Include="Assets\Scripts\QuizQuestion.cs" />
-    <Compile Include="Assets\Scripts\UIManager.cs" />
+    <Compile Include="Assets\Scripts\UI Scripts\StatMenuUI.cs" />
+    <Compile Include="Assets\Scripts\UI Scripts\UIManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

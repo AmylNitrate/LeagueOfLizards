@@ -7,20 +7,16 @@ public class PushUp : MonoBehaviour
 {
 
     Animation anim;
-    int Energy;
     float timeLeft = 20;
     public bool stop;
     public GameObject gameOver;
 
-    private Text textRef1;
     private Text textRef2;
 
     void Start()
     {
-        Energy = GameObject.Find("Data").GetComponent<Data>().energy;
         anim = GetComponent<Animation>();
         stop = false;
-        textRef1 = GameObject.Find("EnergyText").GetComponent<Text>();
         textRef2 = GameObject.Find("Timer").GetComponent<Text>();
     }
 
@@ -48,18 +44,17 @@ public class PushUp : MonoBehaviour
                 anim.Play("Take001");
                 if (GameObject.Find("bar").GetComponent<Bar>().Good)
                 {
-                    Energy -= 1;
+                    Data.control.energy -= 1;
                 }
                 if (!GameObject.Find("bar").GetComponent<Bar>().Good)
                 {
-                    Energy -= 2;
+                    Data.control.energy -= 2;
                 }
             }
             if (Input.GetMouseButtonUp(0))
                 anim.Stop("Take001");
         }
 
-        textRef1.text = "Energy = " + Energy;
         textRef2.text = "Timer = " + (int)timeLeft;
     }
 
