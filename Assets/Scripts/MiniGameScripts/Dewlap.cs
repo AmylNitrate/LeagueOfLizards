@@ -14,7 +14,6 @@ public class Dewlap : MonoBehaviour
     bool stop;
 
     private Text textRef2;
-    private Text textRef3;
 
 
     // Use this for initialization
@@ -22,7 +21,6 @@ public class Dewlap : MonoBehaviour
     {
         Data.control.points = 0;
         textRef2 = GameObject.Find("Timer").GetComponent<Text>();
-        textRef3 = GameObject.Find("Points").GetComponent<Text>();
         stop = false;
 	}
 
@@ -35,14 +33,24 @@ public class Dewlap : MonoBehaviour
             timeLeft -= Time.deltaTime;
             if (timeLeft < 0)
             {
+                GetPointsValue();
                 stop = true;
                 gameOver.SetActive(true);
 
             }
 
-            dewlap.transform.Translate((float)-0.01, (float)0.01, 0);
+            Debug.Log(dewlap.transform.position.x);
 
-            if (Input.GetMouseButtonDown(0))
+            if (dewlap.transform.position.x < 1.8)
+            {
+                dewlap.transform.Translate((float)-0.01, (float)0.01, 0);
+            }
+            else if(dewlap.transform.position.x > 1.8)
+            {
+                Debug.Log("Stop");
+            }
+
+            if (Input.GetMouseButtonDown(0) && dewlap.transform.position.x > 1.4)
             {
                 Data.control.energy--;
                 RaycastHit hit;
@@ -51,12 +59,32 @@ public class Dewlap : MonoBehaviour
                     if (hit.collider == dewlapCollider)
                         dewlap.transform.Translate((float)0.05, (float)-0.05, 0);
             }
+            else if(dewlap.transform.position.x < 1.4)
+            {
+                Debug.Log("STOP");
+            }
+
 
         }
 
         textRef2.text = "Timer = " + (int)timeLeft;
-        textRef3.text = "Points = " + Data.control.points;
 
+    }
+
+    void GetPointsValue()
+    {
+        if(dewlap.transform.position.x < 1.9 && dewlap.transform.position.x > 1.7)
+        {
+            Data.control.points = 5;
+        }
+        else if(dewlap.transform.position.x < 1.7 && dewlap.transform.position.x > 1.5)
+        {
+            Data.control.points = 10;
+        }
+        else if(dewlap.transform.position.x < 1.5 && dewlap.transform.position.x > 1.2)
+        {
+            Data.control.points = 20;
+        }
     }
 
 
