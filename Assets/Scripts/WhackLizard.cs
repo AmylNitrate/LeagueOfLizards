@@ -55,14 +55,15 @@ public class WhackLizard : MonoBehaviour {
 
     void OnMouseDown()
     {
+        Data.control.energy--;
         //Give points
         if (!isTail)
         {
-            WhackALizardController.instance.points += 5;
+            Data.control.points += 5;
         }
         else
         {
-            WhackALizardController.instance.points -= 5;
+            Data.control.points -= 5;
         }
         Finish();
     }

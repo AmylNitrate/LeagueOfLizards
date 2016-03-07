@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class WhackALizardController : MonoBehaviour
 {
@@ -14,7 +15,12 @@ public class WhackALizardController : MonoBehaviour
     public float baseSpawnTime;
     float spawnTime;
 
-    public int points;
+    public GameObject gameOver;
+    bool stop;
+    float timeLeft = 20;
+    private Text textRef2;
+    private Text textRef3;
+
 
     void Awake()
     {
@@ -23,16 +29,39 @@ public class WhackALizardController : MonoBehaviour
 
     }
 
+    void Start()
+    {
+        Data.control.points = 0;
+        stop = false;
+        textRef2 = GameObject.Find("Timer").GetComponent<Text>();
+        textRef3 = GameObject.Find("Points").GetComponent<Text>();
+
+    }
+
     void Update()
     {
-        if (spawnTime <= 0)
+        if (!stop)
         {
-            Spawn();
+            timeLeft -= Time.deltaTime;
+            if (timeLeft < 0)
+            {
+                stop = true;
+                gameOver.SetActive(true);
+
+
+            }
+            if (spawnTime <= 0)
+            {
+                Spawn();
+            }
+            else
+            {
+                spawnTime -= Time.deltaTime;
+            }
         }
-        else
-        {
-            spawnTime -= Time.deltaTime;
-        }
+        textRef2.text = "Timer = " + (int)timeLeft;
+        textRef3.text = "Points = " + Data.control.points;
+
     }
 
     void GetRandomSpawnTime()

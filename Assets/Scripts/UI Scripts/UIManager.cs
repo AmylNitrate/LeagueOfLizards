@@ -8,6 +8,8 @@ public class UIManager : MonoBehaviour
 
     private Text textRef1;
 
+
+
     public void GoToLevel(string Level)
     {
         SceneManager.LoadScene(Level);
@@ -22,6 +24,9 @@ public class UIManager : MonoBehaviour
     void Start ()
     {
         textRef1 = GameObject.Find("EnergyText").GetComponent<Text>();
+
+
+
     }
 	
 	// Update is called once per frame
@@ -29,6 +34,7 @@ public class UIManager : MonoBehaviour
 	void Update ()
     {
         textRef1.text = "Energy = " + Data.control.energy;
+
     }
 
     //void Save()
