@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
 
-    private Text textRef1;
+    //private Text textRef1;
 
 
 
@@ -23,9 +23,7 @@ public class UIManager : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-        textRef1 = GameObject.Find("EnergyText").GetComponent<Text>();
-
-
+        //textRef1 = GameObject.Find("EnergyText").GetComponent<Text>();
 
     }
 	
@@ -33,9 +31,15 @@ public class UIManager : MonoBehaviour
       
 	void Update ()
     {
-        textRef1.text = "" + Data.control.energy;
+        //textRef1.text = "" + Data.control.energy;
 
     }
+
+	public void SignIn()
+	{
+		MultiplayerController.Instance.SignInAndStartMPGame ();
+	}
+		
 
     //void Save()
     //{

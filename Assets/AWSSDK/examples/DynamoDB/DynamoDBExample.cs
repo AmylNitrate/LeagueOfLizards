@@ -17,6 +17,7 @@ using UnityEngine;
 using System.Collections;
 using Amazon.DynamoDBv2;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace AWSSDK.Examples
 {
@@ -37,17 +38,17 @@ namespace AWSSDK.Examples
 
         void LowLevelListener()
         {
-            Application.LoadLevel(1);
+            SceneManager.LoadScene(1);
         }
 
         void MidLevelScanListener()
         {
-            Application.LoadLevel(2);
+            SceneManager.LoadScene(2);
         }
 
         void HighLevelListener()
         {
-            Application.LoadLevel(3);
+            SceneManager.LoadScene(3);
         }
     }
 }

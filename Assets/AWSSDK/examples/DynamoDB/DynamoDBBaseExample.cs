@@ -19,6 +19,7 @@ using Amazon.DynamoDBv2;
 using Amazon.CognitoIdentity;
 using Amazon.Runtime;
 using Amazon;
+using UnityEngine.SceneManagement;
 
 namespace AWSSDK.Examples
 {
@@ -55,7 +56,7 @@ namespace AWSSDK.Examples
 
         protected void BackListener()
         {
-            Application.LoadLevel(0);
+            SceneManager.LoadScene(0);
         }
 
     }

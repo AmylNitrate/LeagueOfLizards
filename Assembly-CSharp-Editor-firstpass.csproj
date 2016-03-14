@@ -6,10 +6,10 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{3FDCBA2D-C66B-5F3C-0D94-FFA13D506578}</ProjectGuid>
+    <ProjectGuid>{64BDC3EA-1B28-EC1C-F897-081D128F1034}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
+    <AssemblyName>Assembly-CSharp-Editor-firstpass</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>Assets</BaseDirectory>
@@ -45,45 +45,32 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\AWSSDK\Editor\AWSUnitySDKVersionChecker.cs" />
-     <Compile Include="Assets\AWSSDK\Editor\DefaultExecutionOrder.cs" />
-     <Compile Include="Assets\GooglePlayGames\Editor\CocoaPodHelper.cs" />
-     <Compile Include="Assets\GooglePlayGames\Editor\GPGSAndroidSetupUI.cs" />
-     <Compile Include="Assets\GooglePlayGames\Editor\GPGSDependencies.cs" />
-     <Compile Include="Assets\GooglePlayGames\Editor\GPGSDocsUI.cs" />
-     <Compile Include="Assets\GooglePlayGames\Editor\GPGSIOSSetupUI.cs" />
-     <Compile Include="Assets\GooglePlayGames\Editor\GPGSInstructionWindow.cs" />
-     <Compile Include="Assets\GooglePlayGames\Editor\GPGSPostBuild.cs" />
-     <Compile Include="Assets\GooglePlayGames\Editor\GPGSProjectSettings.cs" />
-     <Compile Include="Assets\GooglePlayGames\Editor\GPGSStrings.cs" />
-     <Compile Include="Assets\GooglePlayGames\Editor\GPGSUpgrader.cs" />
-     <Compile Include="Assets\GooglePlayGames\Editor\GPGSUtil.cs" />
-     <Compile Include="Assets\GooglePlayGames\Editor\NearbyConnectionUI.cs" />
-     <Compile Include="Assets\GooglePlayGames\Editor\PlistBuddyHelper.cs" />
-     <Compile Include="Assets\GooglePlayGames\Editor\xcode\Elements.cs" />
-     <Compile Include="Assets\GooglePlayGames\Editor\xcode\Lexer.cs" />
-     <Compile Include="Assets\GooglePlayGames\Editor\xcode\Objects.cs" />
-     <Compile Include="Assets\GooglePlayGames\Editor\xcode\PBXProject.cs" />
-     <Compile Include="Assets\GooglePlayGames\Editor\xcode\Parser.cs" />
-     <Compile Include="Assets\GooglePlayGames\Editor\xcode\Sections.cs" />
-     <Compile Include="Assets\GooglePlayGames\Editor\xcode\Serializer.cs" />
-     <Compile Include="Assets\GooglePlayGames\Editor\xcode\Utils.cs" />
-     <Compile Include="Assets\PlayServicesResolver\Editor\DefaultResolver.cs" />
-     <Compile Include="Assets\PlayServicesResolver\Editor\IResolver.cs" />
-     <Compile Include="Assets\PlayServicesResolver\Editor\PlayServicesResolver.cs" />
-     <Compile Include="Assets\PlayServicesResolver\Editor\ResolverVer1_1.cs" />
-     <Compile Include="Assets\PlayServicesResolver\Editor\SampleDependencies.cs" />
-     <Compile Include="Assets\PlayServicesResolver\Editor\SettingsDialog.cs" />
-     <None Include="Assets\GooglePlayGames\Editor\Podfile.txt" />
-     <None Include="Assets\AWSSDK\src\Core\aws-unity-sdk-version-Core.txt" />
-     <None Include="Assets\GooglePlayGames\Editor\template-GameInfo.txt" />
-     <None Include="Assets\GooglePlayGames\Editor\template-AndroidManifest.txt" />
-     <None Include="Assets\Scripts\DataManagement\DataManagementREADME.txt" />
-     <None Include="Assets\AWSSDK\src\Services\DynamoDBv2\aws-unity-sdk-version-DynamoDBv2.txt" />
-     <None Include="Assets\GooglePlayGames\Editor\template-Constants.txt" />
-     <None Include="Assets\AWSSDK\src\Core\Resources\awsconfig.xml" />
-     <None Include="Assets\AWSSDK\src\Services\CognitoSync\aws-unity-sdk-version-CognitoSync.txt" />
+     <Compile Include="Assets\Plugins\Android\GooglePlayGames\Editor\CocoaPodHelper.cs" />
+     <Compile Include="Assets\Plugins\Android\GooglePlayGames\Editor\GPGSAndroidSetupUI.cs" />
+     <Compile Include="Assets\Plugins\Android\GooglePlayGames\Editor\GPGSDependencies.cs" />
+     <Compile Include="Assets\Plugins\Android\GooglePlayGames\Editor\GPGSDocsUI.cs" />
+     <Compile Include="Assets\Plugins\Android\GooglePlayGames\Editor\GPGSIOSSetupUI.cs" />
+     <Compile Include="Assets\Plugins\Android\GooglePlayGames\Editor\GPGSInstructionWindow.cs" />
+     <Compile Include="Assets\Plugins\Android\GooglePlayGames\Editor\GPGSPostBuild.cs" />
+     <Compile Include="Assets\Plugins\Android\GooglePlayGames\Editor\GPGSProjectSettings.cs" />
+     <Compile Include="Assets\Plugins\Android\GooglePlayGames\Editor\GPGSStrings.cs" />
+     <Compile Include="Assets\Plugins\Android\GooglePlayGames\Editor\GPGSUpgrader.cs" />
+     <Compile Include="Assets\Plugins\Android\GooglePlayGames\Editor\GPGSUtil.cs" />
+     <Compile Include="Assets\Plugins\Android\GooglePlayGames\Editor\NearbyConnectionUI.cs" />
+     <Compile Include="Assets\Plugins\Android\GooglePlayGames\Editor\PlistBuddyHelper.cs" />
+     <Compile Include="Assets\Plugins\Android\GooglePlayGames\Editor\xcode\Elements.cs" />
+     <Compile Include="Assets\Plugins\Android\GooglePlayGames\Editor\xcode\Lexer.cs" />
+     <Compile Include="Assets\Plugins\Android\GooglePlayGames\Editor\xcode\Objects.cs" />
+     <Compile Include="Assets\Plugins\Android\GooglePlayGames\Editor\xcode\PBXProject.cs" />
+     <Compile Include="Assets\Plugins\Android\GooglePlayGames\Editor\xcode\Parser.cs" />
+     <Compile Include="Assets\Plugins\Android\GooglePlayGames\Editor\xcode\Sections.cs" />
+     <Compile Include="Assets\Plugins\Android\GooglePlayGames\Editor\xcode\Serializer.cs" />
+     <Compile Include="Assets\Plugins\Android\GooglePlayGames\Editor\xcode\Utils.cs" />
+     <None Include="Assets\Plugins\Android\GooglePlayGames\Editor\Podfile.txt" />
+     <None Include="Assets\Plugins\Android\GooglePlayGames\Editor\template-GameInfo.txt" />
+     <None Include="Assets\Plugins\Android\GooglePlayGames\Editor\template-AndroidManifest.txt" />
      <None Include="Assets\Plugins\Android\MainLibProj\AndroidManifest.xml" />
+     <None Include="Assets\Plugins\Android\GooglePlayGames\Editor\template-Constants.txt" />
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/Editor/UnityEditor.Advertisements.dll</HintPath>
  </Reference>
@@ -120,10 +107,6 @@
  <Reference Include="UnityEditor.WindowsStandalone.Extensions">
  <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
  </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="Assembly-CSharp.csproj">
-      <Project>{BCAE16F2-5C13-E125-C059-A984F330F5AB}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
