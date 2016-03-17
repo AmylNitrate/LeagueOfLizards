@@ -9,8 +9,9 @@ public class WhackALizardController : MonoBehaviour
     [SerializeField]
     List<GameObject> spawnPoints = new List<GameObject>();
 
-    [SerializeField]
-    GameObject lizard, tail;
+
+	public GameObject lizard;
+	public GameObject tail;
 
     public float baseSpawnTime;
     float spawnTime;
