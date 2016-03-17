@@ -59,5 +59,31 @@ public class Attributes : MonoBehaviour {
                 break;
 
         }
+
+    }
+
+    void Energy()
+    {
+        //Inceases your energy bar
+        switch(Data.control.energy)
+        {
+            case 1:
+                // 100
+                break;
+
+            case 2:
+                // 150
+                break;
+
+            case 3:
+                // 200
+                break;
+
+            default:
+                // 50
+                break;
+
+        }
+
     }
 }
