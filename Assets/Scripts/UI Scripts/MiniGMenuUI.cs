@@ -20,7 +20,7 @@ public class MiniGMenuUI : MonoBehaviour {
   
 
 {
-        textRef2.text = "" + Data.control.points;
+        //textRef2.text = "" + Data.control.points;
         textRef3.text = ""; // + Data.control.OppEnergy;
         textRef4.text = ""; // + Data.control.OppPoints;
 

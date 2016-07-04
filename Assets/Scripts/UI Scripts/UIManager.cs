@@ -37,7 +37,7 @@ public class UIManager : MonoBehaviour
 
 	public void SignIn()
 	{
-		MultiplayerController.Instance.SignInAndStartMPGame ();
+		//MultiplayerController.Instance.SignInAndStartMPGame ();
 	}
 		
 

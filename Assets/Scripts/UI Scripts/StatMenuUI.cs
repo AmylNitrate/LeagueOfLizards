@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class StatMenuUI : MonoBehaviour, MPLobbyListener
+public class StatMenuUI : MonoBehaviour
 {
     private Text textRef1;
     private Text textRef2;
@@ -26,15 +26,15 @@ public class StatMenuUI : MonoBehaviour, MPLobbyListener
 		buttonWidth = 301.0f * Screen.width / 660.0f;
 		buttonHeight = 55.0f * Screen.width / 660.0f;
 
-		MultiplayerController.Instance.TrySilentSignIn();
+		//MultiplayerController.Instance.TrySilentSignIn();
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        textRef1.text = "" + Data.control.energy;
-        textRef2.text = "" + Data.control.upgradePoints;
+        //textRef1.text = "" + Data.control.energy;
+        //textRef2.text = "" + Data.control.upgradePoints;
     }
 
 	void OnGUI() {
@@ -54,20 +54,20 @@ public class StatMenuUI : MonoBehaviour, MPLobbyListener
 						RetainedUserPicksScript.Instance.multiplayerGame = true;
 						_lobbyMessage = "Starting a multiplayer game...";
 						_showLobbyDialog = true;
-						MultiplayerController.Instance.lobbylisterner = this;
-						MultiplayerController.Instance.SignInAndStartMPGame ();
+						//MultiplayerController.Instance.lobbylisterner = this;
+						//MultiplayerController.Instance.SignInAndStartMPGame ();
 					}
 				}
 			}
 		}
-		if (MultiplayerController.Instance.isAuthenticated()) {
-			if (GUI.Button(new Rect(Screen.width  - (buttonWidth * 0.75f),
-				Screen.height - (buttonHeight * 0.75f),
-				buttonWidth * 0.75f,
-				buttonHeight * 0.75f), signOutButton)) {
-				MultiplayerController.Instance.SignOut();
-			}
-		}
+		//if (MultiplayerController.Instance.isAuthenticated()) {
+		//	if (GUI.Button(new Rect(Screen.width  - (buttonWidth * 0.75f),
+		//		Screen.height - (buttonHeight * 0.75f),
+		//		buttonWidth * 0.75f,
+		//		buttonHeight * 0.75f), signOutButton)) {
+		//		MultiplayerController.Instance.SignOut();
+		//	}
+		//}
 		if (_showLobbyDialog) {
 			GUI.skin = guiskin;
 			GUI.Box (new Rect (Screen.width * 0.25f, Screen.height * 0.4f, Screen.width * 0.5f, Screen.height * 0.5f), _lobbyMessage);

@@ -32,7 +32,7 @@ public class WhackALizardController : MonoBehaviour
 
     void Start()
     {
-        Data.control.points = 0;
+        //Data.control.points = 0;
         stop = false;
         textRef2 = GameObject.Find("Timer").GetComponent<Text>();
         textRef3 = GameObject.Find("Points").GetComponent<Text>();
@@ -61,7 +61,7 @@ public class WhackALizardController : MonoBehaviour
             }
         }
         textRef2.text = "Timer = " + (int)timeLeft;
-        textRef3.text = "Points = " + Data.control.points;
+        //textRef3.text = "Points = " + Data.control.points;
 
     }
 

@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2015
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "League of Lizards.CSharp", "League of Lizards.CSharp.csproj", "{88BFCF57-33BE-A4FE-04BE-2EEB6BE7F8E1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "League of Lizards.CSharp.Editor", "League of Lizards.CSharp.Editor.csproj", "{3550CC46-151C-AF3F-E391-2EFCF8C636F3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{88BFCF57-33BE-A4FE-04BE-2EEB6BE7F8E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88BFCF57-33BE-A4FE-04BE-2EEB6BE7F8E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88BFCF57-33BE-A4FE-04BE-2EEB6BE7F8E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3550CC46-151C-AF3F-E391-2EFCF8C636F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3550CC46-151C-AF3F-E391-2EFCF8C636F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3550CC46-151C-AF3F-E391-2EFCF8C636F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3550CC46-151C-AF3F-E391-2EFCF8C636F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -19,7 +19,7 @@ public class Dewlap : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-        Data.control.points = 0;
+        //Data.control.points = 0;
         textRef2 = GameObject.Find("Timer").GetComponent<Text>();
         stop = false;
 	}
@@ -52,7 +52,7 @@ public class Dewlap : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0) && dewlap.transform.position.x > 1.4)
             {
-                Data.control.energy--;
+                //Data.control.energy--;
                 RaycastHit hit;
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out hit))
@@ -75,15 +75,15 @@ public class Dewlap : MonoBehaviour
     {
         if(dewlap.transform.position.x < 1.9 && dewlap.transform.position.x > 1.7)
         {
-            Data.control.points = 5;
+            //Data.control.points = 5;
         }
         else if(dewlap.transform.position.x < 1.7 && dewlap.transform.position.x > 1.5)
         {
-            Data.control.points = 10;
+            //Data.control.points = 10;
         }
         else if(dewlap.transform.position.x < 1.5 && dewlap.transform.position.x > 1.2)
         {
-            Data.control.points = 20;
+            //Data.control.points = 20;
         }
     }
 
