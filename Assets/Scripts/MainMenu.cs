@@ -21,8 +21,16 @@ public class MainMenu : MonoBehaviour {
             if (MultiplayerController.Instance.IsAuthenticated())
             {
                 invitationCounter.text = MultiplayerController.Instance.GetInviteNumber().ToString();
+                StartCoroutine(CheckForInvites());
                 signedIn = true;
             }
         }
+    }
+
+    IEnumerator CheckForInvites()
+    {
+        yield return new WaitForSeconds(1f);
+        invitationCounter.text = MultiplayerController.Instance.GetInviteNumber().ToString();
+        StartCoroutine(CheckForInvites());
     }
 }

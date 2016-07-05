@@ -9,6 +9,8 @@ public class MultiplayerController : RealTimeMultiplayerListener {
 
     private static MultiplayerController _instance = null;
 
+    int invNumber = 0;
+    Invitation[] invitationArray;
     private uint minOpponents = 1, maxOpponents = 1, gameVariation;
 
     private MultiplayerController()
@@ -85,15 +87,17 @@ public class MultiplayerController : RealTimeMultiplayerListener {
     
     public int GetInviteNumber()
     {
-        int invNumber = 0;
+        invNumber = 0;
         PlayGamesPlatform.Instance.RealTime.GetAllInvitations((invites) =>
-        {            
+        {
+            invitationArray = invites;
             foreach (Invitation invite in invites)
             {
                 invNumber++;
+                Debug.Log("Invite received from" + invite.Inviter + invitationArray.Length);
             }
         });
-        return invNumber;
+        return invitationArray.Length;
     }
 
     public List<Participant> GetAllPlayers()
