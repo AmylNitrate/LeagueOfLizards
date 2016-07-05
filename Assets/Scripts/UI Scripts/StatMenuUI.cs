@@ -15,12 +15,17 @@ public class StatMenuUI : MonoBehaviour
 	private bool _showLobbyDialog;
 	private string _lobbyMessage;
 
+    [SerializeField]
+    Text enemyName;
+
 	public GUISkin guiskin;
 
     void Start()
     {
         textRef1 = GameObject.Find("EnergyText").GetComponent<Text>();
         textRef2 = GameObject.Find("UpgradePoints").GetComponent<Text>();
+
+        enemyName.text = GameData.instance.enemyParticipant.DisplayName;
 
 		// I know that 301x55 looks good on a 660-pixel wide screen, so we can extrapolate from there
 		buttonWidth = 301.0f * Screen.width / 660.0f;

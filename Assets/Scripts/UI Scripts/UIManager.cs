@@ -8,7 +8,13 @@ public class UIManager : MonoBehaviour
 
     //private Text textRef1;
 
+    public static UIManager instance;
 
+    void Awake()
+    {
+        instance = this;
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
+    }
 
     public void GoToLevel(string Level)
     {
@@ -37,8 +43,13 @@ public class UIManager : MonoBehaviour
 
 	public void SignIn()
 	{
-		//MultiplayerController.Instance.SignInAndStartMPGame ();
+		MultiplayerController.Instance.SignInAndStartMPGame();
 	}
+
+    public void SignOut()
+    {
+        MultiplayerController.Instance.SignOut();
+    }
 		
 
     //void Save()

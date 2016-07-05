@@ -247,12 +247,15 @@
     <Compile Include="Assets\GooglePlayGames\Platforms\PlayGamesClientFactory.cs" />
     <Compile Include="Assets\GooglePlayGames\Platforms\TokenClient.cs" />
     <Compile Include="Assets\GooglePlayGames\PluginVersion.cs" />
+    <Compile Include="Assets\MultiplayerController.cs" />
+    <Compile Include="Assets\Scripts\GameData.cs" />
     <Compile Include="Assets\Scripts\MiniGameScripts\Bar.cs" />
     <Compile Include="Assets\Scripts\MiniGameScripts\Dewlap.cs" />
     <Compile Include="Assets\Scripts\MiniGameScripts\PushUp.cs" />
     <Compile Include="Assets\Scripts\MiniGameScripts\WhackALizardController.cs" />
     <Compile Include="Assets\Scripts\MiniGameScripts\WhackHole.cs" />
     <Compile Include="Assets\Scripts\MiniGameScripts\WhackLizard.cs" />
+    <Compile Include="Assets\Scripts\MultiplayerLobby.cs" />
     <Compile Include="Assets\Scripts\OpenURL.cs" />
     <Compile Include="Assets\Scripts\QuizAnswer.cs" />
     <Compile Include="Assets\Scripts\QuizBrain.cs" />
