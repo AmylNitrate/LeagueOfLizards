@@ -4,14 +4,19 @@ using System.Collections;
 
 public class MainMenu : MonoBehaviour {
 
+    public static MainMenu instance;
+
     [SerializeField]
     Text invitationCounter;
 
     bool signedIn;
 
+    public GameObject incomingInvitationPanel;
+
     void Awake()
     {
         MultiplayerController.Instance.TrySignIn();
+        instance = this;
     }
 
     void Update()
@@ -25,6 +30,16 @@ public class MainMenu : MonoBehaviour {
                 signedIn = true;
             }
         }
+    }
+
+    public void AcceptInvite()
+    {
+        MultiplayerController.Instance.AcceptIncomingInvitation();
+    }
+
+    public void DeclineInvite()
+    {
+        MultiplayerController.Instance.DeclineInvitation();
     }
 
     IEnumerator CheckForInvites()

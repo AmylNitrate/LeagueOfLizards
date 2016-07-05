@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
+using UnityEngine.SocialPlatforms;
 using System.Collections;
 using System.Collections.Generic;
 using GooglePlayGames;
+using GooglePlayGames.BasicApi;
 using GooglePlayGames.BasicApi.Multiplayer;
 using System;
 
@@ -13,8 +15,12 @@ public class MultiplayerController : RealTimeMultiplayerListener {
     Invitation[] invitationArray;
     private uint minOpponents = 1, maxOpponents = 1, gameVariation;
 
+    Invitation IncomingInvitation;
+
     private MultiplayerController()
     {
+        PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder().WithInvitationDelegate(OnInvitationReceived).Build();
+        PlayGamesPlatform.InitializeInstance(config);
         PlayGamesPlatform.DebugLogEnabled = true;
         PlayGamesPlatform.Activate();
     }
@@ -98,6 +104,32 @@ public class MultiplayerController : RealTimeMultiplayerListener {
             }
         });
         return invitationArray.Length;
+    }
+
+    public void OnInvitationReceived(Invitation invitation, bool shouldAutoAccept)
+    {
+        if (shouldAutoAccept)
+        {
+            PlayGamesPlatform.Instance.RealTime.AcceptInvitation(invitation.InvitationId, this);
+        }
+        else
+        {
+            IncomingInvitation = invitation;
+            if (MainMenu.instance != null)
+            {
+                MainMenu.instance.incomingInvitationPanel.SetActive(true);
+            }
+        }
+    }
+
+    public void AcceptIncomingInvitation()
+    {
+        PlayGamesPlatform.Instance.RealTime.AcceptInvitation(IncomingInvitation.InvitationId, this);
+    }
+
+    public void DeclineInvitation()
+    {
+        MainMenu.instance.incomingInvitationPanel.SetActive(false);
     }
 
     public List<Participant> GetAllPlayers()
