@@ -29,6 +29,32 @@ public class MultiplayerController : RealTimeMultiplayerListener {
         }
     }
 
+    public void TrySignIn()
+    {
+        if (!PlayGamesPlatform.Instance.localUser.authenticated)
+        {
+            PlayGamesPlatform.Instance.localUser.Authenticate((bool success) =>
+            {
+                if (success)
+                {
+                    Debug.Log("<----------------------------BREAK------------------------------------->");
+                    Debug.Log("SUCCESSFULLY Signed in " + PlayGamesPlatform.Instance.localUser.userName);
+                }
+                else
+                {
+                    Debug.Log("<----------------------------BREAK------------------------------------->");
+                    Debug.Log("Not signed in correctly");
+                    Debug.Log(PlayGamesPlatform.Instance.localUser.state);
+                }
+            });
+        }
+        else
+        {
+            Debug.Log("<----------------------------BREAK------------------------------------->");
+            Debug.Log("Already signed in");
+        }
+    }
+
     public void SignInAndStartMPGame()
     {
         if (!PlayGamesPlatform.Instance.localUser.authenticated)
@@ -56,6 +82,19 @@ public class MultiplayerController : RealTimeMultiplayerListener {
             StartMatchMaking();
         }
     }
+    
+    public int GetInviteNumber()
+    {
+        int invNumber = 0;
+        PlayGamesPlatform.Instance.RealTime.GetAllInvitations((invites) =>
+        {            
+            foreach (Invitation invite in invites)
+            {
+                invNumber++;
+            }
+        });
+        return invNumber;
+    }
 
     public List<Participant> GetAllPlayers()
     {
@@ -79,7 +118,36 @@ public class MultiplayerController : RealTimeMultiplayerListener {
 
     private void StartMatchMaking()
     {
-        PlayGamesPlatform.Instance.RealTime.CreateQuickGame(minOpponents, maxOpponents, gameVariation, this);
+        //PlayGamesPlatform.Instance.RealTime.CreateQuickGame(minOpponents, maxOpponents, gameVariation, this);
+        PlayGamesPlatform.Instance.RealTime.CreateWithInvitationScreen(minOpponents, maxOpponents, gameVariation, this);
+    }
+
+    public void OpenInvitationScreen()
+    {
+        if (!PlayGamesPlatform.Instance.localUser.authenticated)
+        {
+            PlayGamesPlatform.Instance.localUser.Authenticate((bool success) =>
+            {
+                if (success)
+                {
+                    Debug.Log("<----------------------------BREAK------------------------------------->");
+                    Debug.Log("SUCCESSFULLY Signed in " + PlayGamesPlatform.Instance.localUser.userName);
+                    PlayGamesPlatform.Instance.RealTime.AcceptFromInbox(this);
+                }
+                else
+                {
+                    Debug.Log("<----------------------------BREAK------------------------------------->");
+                    Debug.Log("Not signed in correctly");
+                    Debug.Log(PlayGamesPlatform.Instance.localUser.state);
+                }
+            });
+        }
+        else
+        {
+            Debug.Log("<----------------------------BREAK------------------------------------->");
+            Debug.Log("Already signed in");
+            PlayGamesPlatform.Instance.RealTime.AcceptFromInbox(this);
+        }
     }
 
     private void ShowMPMessage(string message)
@@ -89,6 +157,7 @@ public class MultiplayerController : RealTimeMultiplayerListener {
 
     public void OnRoomSetupProgress(float percent)
     {
+        UIManager.instance.GoToLevel("Multiplayer");
         ShowMPMessage("We are " + percent + "% complete with room setup");
     }
 

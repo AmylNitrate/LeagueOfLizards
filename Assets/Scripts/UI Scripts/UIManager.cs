@@ -26,6 +26,11 @@ public class UIManager : MonoBehaviour
         Application.Quit();
     }
 
+    public void OpenInvitationScreen()
+    {
+        MultiplayerController.Instance.OpenInvitationScreen();
+    }
+
     // Use this for initialization
     void Start ()
     {

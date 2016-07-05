@@ -249,6 +249,7 @@
     <Compile Include="Assets\GooglePlayGames\PluginVersion.cs" />
     <Compile Include="Assets\MultiplayerController.cs" />
     <Compile Include="Assets\Scripts\GameData.cs" />
+    <Compile Include="Assets\Scripts\MainMenu.cs" />
     <Compile Include="Assets\Scripts\MiniGameScripts\Bar.cs" />
     <Compile Include="Assets\Scripts\MiniGameScripts\Dewlap.cs" />
     <Compile Include="Assets\Scripts\MiniGameScripts\PushUp.cs" />
