@@ -256,6 +256,7 @@
     <Compile Include="Assets\Scripts\MiniGameScripts\WhackALizardController.cs" />
     <Compile Include="Assets\Scripts\MiniGameScripts\WhackHole.cs" />
     <Compile Include="Assets\Scripts\MiniGameScripts\WhackLizard.cs" />
+    <Compile Include="Assets\Scripts\MiniGameTracker.cs" />
     <Compile Include="Assets\Scripts\MultiplayerLobby.cs" />
     <Compile Include="Assets\Scripts\OpenURL.cs" />
     <Compile Include="Assets\Scripts\QuizAnswer.cs" />
