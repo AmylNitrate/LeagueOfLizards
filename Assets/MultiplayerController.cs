@@ -13,9 +13,13 @@ public class MultiplayerController : RealTimeMultiplayerListener {
 
     int invNumber = 0;
     Invitation[] invitationArray;
-    private uint minOpponents = 1, maxOpponents = 1, gameVariation;
+    private uint minOpponents = 1, maxOpponents = 1, gameVariation = 0;
 
     Invitation IncomingInvitation;
+
+    private byte protocolVersion = 1;
+    private List<byte> updateMessage;
+    bool isMultiplayerReady = false;
 
     private MultiplayerController()
     {
@@ -117,7 +121,8 @@ public class MultiplayerController : RealTimeMultiplayerListener {
             IncomingInvitation = invitation;
             if (MainMenu.instance != null)
             {
-                MainMenu.instance.incomingInvitationPanel.SetActive(true);
+                MainMenu.instance.PopUpInvite(invitation.Inviter.DisplayName);
+                MainMenu.instance.UpdateInviteCounter(GetInviteNumber());
             }
         }
     }
@@ -202,17 +207,19 @@ public class MultiplayerController : RealTimeMultiplayerListener {
         if (success)
         {
             ShowMPMessage("We are connected to the room, start the game");
-            UIManager.instance.GoToLevel("StatMenu");
+            UIManager.instance.GoToLevel("MiniGameMenu");
         }
         else
         {
             ShowMPMessage("Encountered an error when connecting to the room");
+            UIManager.instance.GoToLevel("Menu");
         }
     }
 
     public void OnLeftRoom()
     {
         ShowMPMessage("Left the room, perform clean up tasks");
+        UIManager.instance.GoToLevel("Menu");
     }
 
     public void OnParticipantLeft(Participant participant)
@@ -239,5 +246,21 @@ public class MultiplayerController : RealTimeMultiplayerListener {
     public void OnRealTimeMessageReceived(bool isReliable, string senderId, byte[] data)
     {
         ShowMPMessage("We have received some gameplay messages from participant ID: " + senderId);
+    }
+
+    //Multiplayer messages
+    /// <summary>
+    /// Sends the players RHP to the other device
+    /// Marked by A
+    /// </summary>
+    public void SendMyRHP()
+    {
+        updateMessage.Clear();
+        updateMessage.Add(protocolVersion);
+        updateMessage.Add((byte)'A');
+        //Get RHP
+        //messageToSend(//RHP from save file)
+        byte[] messageToSend = updateMessage.ToArray();
+        PlayGamesPlatform.Instance.RealTime.SendMessageToAll(false, messageToSend);
     }
 }

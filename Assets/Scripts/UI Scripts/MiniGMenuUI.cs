@@ -17,7 +17,6 @@ public class MiniGMenuUI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update ()
-  
 
 {
         //textRef2.text = "" + Data.control.points;

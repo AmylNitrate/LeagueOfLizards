@@ -7,7 +7,7 @@ public class MainMenu : MonoBehaviour {
     public static MainMenu instance;
 
     [SerializeField]
-    Text invitationCounter;
+    Text invitationCounter, inviterName;
 
     bool signedIn;
 
@@ -26,10 +26,16 @@ public class MainMenu : MonoBehaviour {
             if (MultiplayerController.Instance.IsAuthenticated())
             {
                 invitationCounter.text = MultiplayerController.Instance.GetInviteNumber().ToString();
-                StartCoroutine(CheckForInvites());
+                //StartCoroutine(CheckForInvites());
                 signedIn = true;
             }
         }
+    }
+
+    public void PopUpInvite(string popUpName)
+    {
+        incomingInvitationPanel.SetActive(true);
+        inviterName.text = popUpName;
     }
 
     public void AcceptInvite()
@@ -40,6 +46,11 @@ public class MainMenu : MonoBehaviour {
     public void DeclineInvite()
     {
         MultiplayerController.Instance.DeclineInvitation();
+    }
+
+    public void UpdateInviteCounter(int number)
+    {
+        invitationCounter.text = number.ToString();
     }
 
     IEnumerator CheckForInvites()

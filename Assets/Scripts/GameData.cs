@@ -20,7 +20,7 @@ public class GameData : MonoBehaviour {
     public Participant enemyParticipant;
 
     //Tracking the RHP of both players
-    int myCurrentRHP, enemyCurrentRHP;
+    public int myCurrentRHP, enemyCurrentRHP;
 
     //Checking the number of rounds completed so that players can not do too many assess or escalation rounds
     int assessRoundsComplete, escalationRoundsComplete;
@@ -116,9 +116,10 @@ public class GameData : MonoBehaviour {
     void PopDictionary()
     {
         roundValues.Add(RoundTypes.Assess, 0);
-        roundValues.Add(RoundTypes.Escalate, 1);
-        roundValues.Add(RoundTypes.Fight, 2);
-        roundValues.Add(RoundTypes.RunAway, 3);
+        roundValues.Add(RoundTypes.Assess, 1);
+        roundValues.Add(RoundTypes.Escalate, 2);
+        roundValues.Add(RoundTypes.Fight, 3);
+        roundValues.Add(RoundTypes.RunAway, 4);
     }
 
     /// <summary>
