@@ -11,7 +11,7 @@ public class GameData : MonoBehaviour {
     public static GameData instance;
 
     //The types of rounds that players can choose
-    public enum RoundTypes { Assess, Escalate, Fight, RunAway }
+    public enum RoundTypes { none, Assess, Escalate, Fight, RunAway }
 
     //A dictionary that assigns a numerical value to the round types
     public Dictionary<RoundTypes, int> roundValues = new Dictionary<RoundTypes, int>();
@@ -22,11 +22,17 @@ public class GameData : MonoBehaviour {
     //Tracking the RHP of both players
     public int myCurrentRHP, enemyCurrentRHP;
 
+    //Enemy name
+    string enemyName;
+
     //Checking the number of rounds completed so that players can not do too many assess or escalation rounds
     int assessRoundsComplete, escalationRoundsComplete;
 
     //Tracks the current round that the game is on so that the players can't choose to do a round with a smaller value
     int currentRoundValue;
+
+    //The two choices for the local player and the enemy that is selected on the results UI screen
+    RoundTypes enemyChoice, myChoice;
 
     void Awake()
     {
@@ -62,7 +68,7 @@ public class GameData : MonoBehaviour {
             }
         }
         //Read from save file
-        //myCurrentRHP = 
+        myCurrentRHP = Lizard.current.myRHPRemaining;
         //enemyCurrentRHP = 
         //Set current round
         currentRoundValue = roundValues[RoundTypes.Assess];
@@ -81,7 +87,7 @@ public class GameData : MonoBehaviour {
     /// Check if the players are allowed to do another type of a limited round or the game has already passed
     /// </summary>
     /// <param name="round">Which round the game is currently on</param>
-    /// <returns></returns>
+    /// <returns>True if round is legal, false if not</returns>
     public bool CheckRoundAvailability(RoundTypes round)
     {
         if (round == RoundTypes.Assess && currentRoundValue == roundValues[RoundTypes.Assess])
@@ -116,7 +122,7 @@ public class GameData : MonoBehaviour {
     void PopDictionary()
     {
         roundValues.Add(RoundTypes.Assess, 0);
-        roundValues.Add(RoundTypes.Assess, 1);
+        //roundValues.Add(RoundTypes.Assess, 1);
         roundValues.Add(RoundTypes.Escalate, 2);
         roundValues.Add(RoundTypes.Fight, 3);
         roundValues.Add(RoundTypes.RunAway, 4);
@@ -144,5 +150,105 @@ public class GameData : MonoBehaviour {
                 EndGame();
                 break;
         }
+    }
+
+    /// <summary>
+    /// Updates the enemy lizards RHP
+    /// </summary>
+    /// <param name="enemyRHP">The enemy RHP value</param>
+    public void UpdateEnemyLizardRHP(int enemyRHP)
+    {
+        enemyCurrentRHP = enemyRHP;
+    }
+
+    /// <summary>
+    /// Called when the enemy's choice is received
+    /// </summary>
+    /// <param name="type"></param>
+    public void SetEnemyChoice(RoundTypes type)
+    {
+        enemyChoice = type;
+        CheckChoices();
+    }
+
+    /// <summary>
+    /// Set the choice of the local player
+    /// </summary>
+    /// <param name="type">Which round type they are selecting</param>
+    public void SetMyChoice(RoundTypes type)
+    {
+        myChoice = type;
+        switch (type)
+        {
+            case RoundTypes.Assess:
+                MultiplayerController.Instance.SendAssessRequest();
+                break;
+            case RoundTypes.Escalate:
+                MultiplayerController.Instance.SendEscalationRequest();
+                break;
+            case RoundTypes.Fight:
+                MultiplayerController.Instance.SendFightRequest();
+                break;
+            case RoundTypes.RunAway:
+                MultiplayerController.Instance.SendFleeRequest();
+                break;
+        }
+        CheckChoices();
+    }
+
+    /// <summary>
+    /// Whenever the player makes their choice or the enemy's choice is received
+    /// Check to see if both choices are made and then take action
+    /// </summary>
+    void CheckChoices()
+    {
+        if (enemyChoice != RoundTypes.none && myChoice != RoundTypes.none)
+        {
+            //If either player is trying to run away, inform the other player and set them as the winner
+            if (myChoice == RoundTypes.RunAway || enemyChoice == RoundTypes.RunAway)
+            {
+                ResultsUI.instance.runAwayPanel.SetActive(true);
+                if (myChoice == RoundTypes.RunAway)
+                {
+                    ResultsUI.instance.runAwayPanelValue.text = "You have run away";
+                }
+                else
+                {
+                    ResultsUI.instance.runAwayPanelValue.text = "Your enemy has run away\n\nYou have won";
+                }
+            }
+            //If both choices match then load the correct scene
+            else if (enemyChoice == myChoice)
+            {
+                LoadMiniGame();
+            }
+            //If the enemy's choice has a higher value than the local players choice then the local player will need to select again
+            else if (roundValues[enemyChoice] > roundValues[myChoice])
+            {
+                //Make user choose again
+                Debug.Log("I Need to choose again");
+                myChoice = RoundTypes.none;
+                ResultsUI.instance.enemyChosePanel.SetActive(true);
+                ResultsUI.instance.enemyChoseValue.text = enemyChoice.ToString();
+            }
+            //Likewise if the local players choice has a higher value than the enemy's choice, the enemy will need to choose again
+            //They will have the same calculation on their device and will know so no information needs to be sent
+            else if (roundValues[myChoice] > roundValues[enemyChoice])
+            {
+                //Make enemy choose again
+                Debug.Log("Enemy needs to choose again");
+                enemyChoice = RoundTypes.none;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Loads the appropriate minigame
+    /// </summary>
+    void LoadMiniGame()
+    {
+        Debug.Log("Loading the game: " + myChoice.ToString());
+        enemyChoice = RoundTypes.none;
+        myChoice = RoundTypes.none;
     }
 }

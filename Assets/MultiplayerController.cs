@@ -18,7 +18,7 @@ public class MultiplayerController : RealTimeMultiplayerListener {
     Invitation IncomingInvitation;
 
     private byte protocolVersion = 1;
-    private List<byte> updateMessage;
+    private List<byte> updateMessage = new List<byte>();
     bool isMultiplayerReady = false;
 
     private MultiplayerController()
@@ -207,6 +207,7 @@ public class MultiplayerController : RealTimeMultiplayerListener {
         if (success)
         {
             ShowMPMessage("We are connected to the room, start the game");
+            SendMyRHP();
             UIManager.instance.GoToLevel("MiniGameMenu");
         }
         else
@@ -235,6 +236,11 @@ public class MultiplayerController : RealTimeMultiplayerListener {
         }
     }
 
+    public void LeaveRoom()
+    {
+        PlayGamesPlatform.Instance.RealTime.LeaveRoom();
+    }
+
     public void OnPeersDisconnected(string[] participantIds)
     {
         foreach (string participantID in participantIds)
@@ -246,6 +252,57 @@ public class MultiplayerController : RealTimeMultiplayerListener {
     public void OnRealTimeMessageReceived(bool isReliable, string senderId, byte[] data)
     {
         ShowMPMessage("We have received some gameplay messages from participant ID: " + senderId);
+        byte messageVersion = (byte)data[0];
+        char messageType = (char)data[1];
+        switch (messageType)
+        {
+            case ('A'):
+                int enemyRHP = BitConverter.ToInt32(data, 2);
+                Debug.Log("Received RHP update message: " + enemyRHP.ToString());
+                if (GameData.instance != null)
+                {
+                    Debug.Log("Game data exists");
+                    GameData.instance.UpdateEnemyLizardRHP(enemyRHP);
+                    if (ResultsUI.instance != null)
+                    {
+                        Debug.Log("resultsui Not null");
+                        ResultsUI.instance.GetRHP(50);
+                    }
+                    else
+                    {
+                        Debug.Log("resultsui IS null");
+                    }
+                }
+                else
+                {
+                    Debug.Log("Game data does not exist");
+                }
+                break;
+            case ('B'):
+                if (ResultsUI.instance != null)
+                {
+                    GameData.instance.SetEnemyChoice(GameData.RoundTypes.Assess);
+                }
+                break;
+            case ('C'):
+                if (ResultsUI.instance != null)
+                {
+                    GameData.instance.SetEnemyChoice(GameData.RoundTypes.Escalate);
+                }
+                break;
+            case ('D'):
+                if (ResultsUI.instance != null)
+                {
+                    GameData.instance.SetEnemyChoice(GameData.RoundTypes.Fight);
+                }
+                break;
+            case ('E'):
+                if (ResultsUI.instance != null)
+                {
+                    GameData.instance.SetEnemyChoice(GameData.RoundTypes.RunAway);
+                }
+                break;
+        }
     }
 
     //Multiplayer messages
@@ -259,8 +316,44 @@ public class MultiplayerController : RealTimeMultiplayerListener {
         updateMessage.Add(protocolVersion);
         updateMessage.Add((byte)'A');
         //Get RHP
-        //messageToSend(//RHP from save file)
+        updateMessage.AddRange(BitConverter.GetBytes(Lizard.current.myRHPRemaining));
         byte[] messageToSend = updateMessage.ToArray();
         PlayGamesPlatform.Instance.RealTime.SendMessageToAll(false, messageToSend);
+    }
+
+    public void SendAssessRequest()
+    {
+        updateMessage.Clear();
+        updateMessage.Add(protocolVersion);
+        updateMessage.Add((byte)'B');
+        byte[] messageToSend = updateMessage.ToArray();
+        PlayGamesPlatform.Instance.RealTime.SendMessageToAll(true, messageToSend);
+    }
+
+    public void SendEscalationRequest()
+    {
+        updateMessage.Clear();
+        updateMessage.Add(protocolVersion);
+        updateMessage.Add((byte)'C');
+        byte[] messageToSend = updateMessage.ToArray();
+        PlayGamesPlatform.Instance.RealTime.SendMessageToAll(true, messageToSend);
+    }
+
+    public void SendFightRequest()
+    {
+        updateMessage.Clear();
+        updateMessage.Add(protocolVersion);
+        updateMessage.Add((byte)'D');
+        byte[] messageToSend = updateMessage.ToArray();
+        PlayGamesPlatform.Instance.RealTime.SendMessageToAll(true, messageToSend);
+    }
+
+    public void SendFleeRequest()
+    {
+        updateMessage.Clear();
+        updateMessage.Add(protocolVersion);
+        updateMessage.Add((byte)'E');
+        byte[] messageToSend = updateMessage.ToArray();
+        PlayGamesPlatform.Instance.RealTime.SendMessageToAll(true, messageToSend);
     }
 }

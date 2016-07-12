@@ -17,6 +17,7 @@ public class MainMenu : MonoBehaviour {
     {
         MultiplayerController.Instance.TrySignIn();
         instance = this;
+        SaveLoad.Load();
     }
 
     void Update()
