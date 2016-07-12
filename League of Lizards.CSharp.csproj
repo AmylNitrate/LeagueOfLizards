@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>Android:13</UnityBuildTarget>
     <UnityVersion>5.3.4f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -251,6 +249,8 @@
     <Compile Include="Assets\GooglePlayGames\PluginVersion.cs" />
     <Compile Include="Assets\MultiplayerController.cs" />
     <Compile Include="Assets\Scripts\GameData.cs" />
+    <Compile Include="Assets\Scripts\Lizard.cs" />
+    <Compile Include="Assets\Scripts\LizardCreationController.cs" />
     <Compile Include="Assets\Scripts\MainMenu.cs" />
     <Compile Include="Assets\Scripts\MiniGameScripts\Bar.cs" />
     <Compile Include="Assets\Scripts\MiniGameScripts\Dewlap.cs" />
@@ -265,6 +265,7 @@
     <Compile Include="Assets\Scripts\QuizBrain.cs" />
     <Compile Include="Assets\Scripts\QuizQuestion.cs" />
     <Compile Include="Assets\Scripts\ResultsUI.cs" />
+    <Compile Include="Assets\Scripts\SaveLoad.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\MiniGMenuUI.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\RetainedUserPicksScript.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\StatMenuUI.cs" />

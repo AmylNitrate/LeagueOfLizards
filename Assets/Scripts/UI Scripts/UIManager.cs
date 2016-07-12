@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.IO;
 
 public class UIManager : MonoBehaviour
 {
@@ -14,6 +15,22 @@ public class UIManager : MonoBehaviour
     {
         instance = this;
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
+    }
+
+    public void EditLizard()
+    {
+        if (File.Exists(Application.persistentDataPath + "/savedGame.arl"))
+        {
+            Debug.Log("File exists loading scene");
+            SceneManager.LoadScene("LizardCreation");
+        }
+        else
+        {
+            Debug.Log("Creating new lizard then saving and loading scene");
+            Lizard.current = new Lizard();
+            SaveLoad.Save();
+            SceneManager.LoadScene("LizardCreation");
+        }
     }
 
     public void GoToLevel(string Level)
