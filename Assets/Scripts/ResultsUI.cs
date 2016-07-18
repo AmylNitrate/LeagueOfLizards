@@ -9,9 +9,12 @@ public class ResultsUI : MonoBehaviour {
     [SerializeField]
     Text playerRHP, opponentRHP, opponentActualRHP;
 
-    public Text enemyChoseValue, runAwayPanelValue;
+    public Text enemyChoseValue, runAwayPanelValue, winnerNameValue;
     
-    public GameObject enemyChosePanel, runAwayPanel;
+    public GameObject enemyChosePanel, runAwayPanel, lastWinnerMenu;
+
+    [SerializeField]
+    Button assessButton, escalateButton;
 
     void Awake()
     {
@@ -23,7 +26,16 @@ public class ResultsUI : MonoBehaviour {
 
     void Start()
     {
-        opponentActualRHP.text = GameData.instance.enemyCurrentRHP.ToString();
+        if (MiniGameTracker.instance.GetNumberOfEscalations() >= 1)
+        {
+            escalateButton.interactable = false;
+            assessButton.interactable = false;
+        }
+        if (MiniGameTracker.instance.GetNumberOfAssessments() >= 2)
+        {
+            assessButton.interactable = false;
+        }
+        GetRHP(MiniGameTracker.instance.myRHPRange);
     }
 
     /// <summary>
@@ -40,7 +52,6 @@ public class ResultsUI : MonoBehaviour {
         int rangeMax = opponentRHPVal + temp;
         int rangeMin = opponentRHPVal - (range - temp);
         opponentRHP.text = rangeMin.ToString() + " - " + rangeMax.ToString();
-        opponentActualRHP.text = GameData.instance.enemyCurrentRHP.ToString();
     }
 
     /// <summary>
@@ -83,5 +94,15 @@ public class ResultsUI : MonoBehaviour {
     public void LeaveRoom()
     {
         MultiplayerController.Instance.LeaveRoom();
+    }
+
+    /// <summary>
+    /// Opens the previous winner panel
+    /// </summary>
+    /// <param name="winnerName">The user name of the previous winner</param>
+    public void ShowWinner(string winnerName)
+    {
+        lastWinnerMenu.SetActive(true);
+        winnerNameValue.text = winnerName;
     }
 }

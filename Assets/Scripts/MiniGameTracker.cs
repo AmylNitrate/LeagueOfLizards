@@ -12,6 +12,12 @@ public class MiniGameTracker : MonoBehaviour {
     //Player values showing the winners
     Players assessOneWinner, assessTwoWinner, escalationWinner, fightWinner;
 
+    public int numberOfAssess, numberOfEscalations;
+
+    string lastWinner;
+
+    public int myRHPRange = 50;
+
     void Awake()
     {
         instance = this;
@@ -23,30 +29,36 @@ public class MiniGameTracker : MonoBehaviour {
     /// </summary>
     /// <param name="winner">The winner of the round</param>
     /// <param name="round">Checks which of the assess rounds it is. Retrieve from GameData</param>
-    public void SetAssessWinner(Players winner, int round)
+    public void SetAssessWinner(Players winner)
     {
-        if (round == 1)
+        if (numberOfAssess == 0)
         {
+            numberOfAssess++;
             assessOneWinner = winner;
             if (assessOneWinner == Players.localPlayer)
             {
-                ResultsUI.instance.GetRHP(15);
+                myRHPRange = 15;
+                lastWinner = MultiplayerController.Instance.GetMyName();
             }
             else
             {
-                ResultsUI.instance.GetRHP(20);
+                myRHPRange = 20;
+                lastWinner = GameData.instance.enemyName;
             }
         }
-        if (round == 2)
+        if (numberOfAssess == 1)
         {
+            numberOfAssess++;
             assessTwoWinner = winner;
             if (assessTwoWinner == Players.localPlayer)
             {
-                ResultsUI.instance.GetRHP(10);
+                myRHPRange = 10;
+                lastWinner = MultiplayerController.Instance.GetMyName();
             }
             else
             {
-                ResultsUI.instance.GetRHP(15);
+                myRHPRange = 15;
+                lastWinner = GameData.instance.enemyName;
             }
         }
     }
@@ -58,14 +70,31 @@ public class MiniGameTracker : MonoBehaviour {
     /// <param name="winner">The player who won the round</param>
     public void SetEscalationWinner(Players winner)
     {
+        numberOfEscalations++;
         escalationWinner = winner;
         if (escalationWinner == Players.localPlayer)
         {
-            ResultsUI.instance.GetRHP(5);
+            if (numberOfAssess > 1)
+            {
+                myRHPRange = 5;
+            }
+            else
+            {
+                myRHPRange = 10;
+            }
+            lastWinner = MultiplayerController.Instance.GetMyName();
         }
         else
         {
-            ResultsUI.instance.GetRHP(10);
+            if (numberOfAssess > 1)
+            {
+                myRHPRange = 10;
+            }
+            else
+            {
+                myRHPRange = 15;
+            }
+            lastWinner = GameData.instance.enemyName;
         }
     }
 
@@ -76,5 +105,23 @@ public class MiniGameTracker : MonoBehaviour {
     public void SetFightWinner(Players winner)
     {
         fightWinner = winner;
+        if (fightWinner == Players.localPlayer)
+        {
+            lastWinner = MultiplayerController.Instance.GetMyName();
+        }
+        else
+        {
+            lastWinner = GameData.instance.enemyName;
+        }
+    }
+
+    public int GetNumberOfAssessments()
+    {
+        return numberOfAssess;
+    }
+
+    public int GetNumberOfEscalations()
+    {
+        return numberOfEscalations;
     }
 }

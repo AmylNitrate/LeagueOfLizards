@@ -13,15 +13,18 @@ public class Dewlap : MonoBehaviour
     public GameObject gameOver;
     bool stop;
 
-    private Text textRef2;
+    [SerializeField]
+    Text timerTextValue, pointsTextValue;
+
+    float myPoints, enemyPoints;
 
 
     // Use this for initialization
     void Start ()
     {
         //Data.control.points = 0;
-        textRef2 = GameObject.Find("Timer").GetComponent<Text>();
         stop = false;
+        StartCoroutine(RemovePoints());
 	}
 
     // Update is called once per frame
@@ -33,13 +36,8 @@ public class Dewlap : MonoBehaviour
             timeLeft -= Time.deltaTime;
             if (timeLeft < 0)
             {
-                GetPointsValue();
-                stop = true;
-                gameOver.SetActive(true);
-
+                GameOver();
             }
-
-            Debug.Log(dewlap.transform.position.x);
 
             if (dewlap.transform.position.x < 1.8)
             {
@@ -57,36 +55,61 @@ public class Dewlap : MonoBehaviour
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out hit))
                     if (hit.collider == dewlapCollider)
+                    {
                         dewlap.transform.Translate((float)0.05, (float)-0.05, 0);
+                        myPoints++;
+                        GetPointsValue();
+                    }
             }
             else if(dewlap.transform.position.x < 1.4)
             {
                 Debug.Log("STOP");
             }
-
-
         }
 
-        textRef2.text = "Timer = " + (int)timeLeft;
+        timerTextValue.text = "Timer = " + timeLeft.ToString("0.00");
 
     }
 
+    void GameOver()
+    {
+        gameOver.SetActive(true);
+        stop = true;
+
+        //Send points to opponent
+        
+    }
+
+    //Lowest points will win
     void GetPointsValue()
     {
-        if(dewlap.transform.position.x < 1.9 && dewlap.transform.position.x > 1.7)
+        pointsTextValue.text = myPoints.ToString();
+    }
+
+    IEnumerator RemovePoints()
+    {
+        yield return new WaitForSeconds(0.6f);
+        if (!stop)
         {
-            //Data.control.points = 5;
-        }
-        else if(dewlap.transform.position.x < 1.7 && dewlap.transform.position.x > 1.5)
-        {
-            //Data.control.points = 10;
-        }
-        else if(dewlap.transform.position.x < 1.5 && dewlap.transform.position.x > 1.2)
-        {
-            //Data.control.points = 20;
+            if (myPoints > 1)
+            {
+                myPoints -= 2;
+                GetPointsValue();
+            }
+            StartCoroutine(RemovePoints());
         }
     }
 
-
+    void ComparePoints()
+    {
+        if (myPoints > enemyPoints)
+        {
+            MiniGameTracker.instance.SetAssessWinner(MiniGameTracker.Players.localPlayer);
+        }
+        else
+        {
+            MiniGameTracker.instance.SetAssessWinner(MiniGameTracker.Players.enemy);
+        }
+    }
 }
 

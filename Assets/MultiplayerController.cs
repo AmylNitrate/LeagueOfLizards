@@ -249,6 +249,11 @@ public class MultiplayerController : RealTimeMultiplayerListener {
         }
     }
 
+    public string GetMyName()
+    {
+        return PlayGamesPlatform.Instance.localUser.userName;
+    }
+
     public void OnRealTimeMessageReceived(bool isReliable, string senderId, byte[] data)
     {
         ShowMPMessage("We have received some gameplay messages from participant ID: " + senderId);

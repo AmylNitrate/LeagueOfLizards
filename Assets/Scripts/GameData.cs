@@ -23,7 +23,7 @@ public class GameData : MonoBehaviour {
     public int myCurrentRHP, enemyCurrentRHP;
 
     //Enemy name
-    string enemyName;
+    public string enemyName;
 
     //Checking the number of rounds completed so that players can not do too many assess or escalation rounds
     int assessRoundsComplete, escalationRoundsComplete;
