@@ -311,6 +311,14 @@ public class MultiplayerController : RealTimeMultiplayerListener {
                 Dewlap.instance.enemyPoints = BitConverter.ToInt32(data, 2);
                 Dewlap.instance.ComparePoints();
                 break;
+            case ('G'):
+                PushUp.instance.enemyPoints = BitConverter.ToInt32(data, 2);
+                PushUp.instance.ComparePoints();
+                break;
+            case ('H'):
+                WhackALizardController.instance.enemyPoints = BitConverter.ToInt32(data, 2);
+                WhackALizardController.instance.ComparePoints();
+                break;
         }
     }
 
@@ -373,6 +381,26 @@ public class MultiplayerController : RealTimeMultiplayerListener {
         updateMessage.Clear();
         updateMessage.Add(protocolVersion);
         updateMessage.Add((byte)'F');
+        updateMessage.AddRange(BitConverter.GetBytes(points));
+        byte[] messageToSend = updateMessage.ToArray();
+        PlayGamesPlatform.Instance.RealTime.SendMessageToAll(true, messageToSend);
+    }
+
+    public void SendMyEscalationPoints(int points)
+    {
+        updateMessage.Clear();
+        updateMessage.Add(protocolVersion);
+        updateMessage.Add((byte)'G');
+        updateMessage.AddRange(BitConverter.GetBytes(points));
+        byte[] messageToSend = updateMessage.ToArray();
+        PlayGamesPlatform.Instance.RealTime.SendMessageToAll(true, messageToSend);
+    }
+
+    public void SendMyFightPoints(int points)
+    {
+        updateMessage.Clear();
+        updateMessage.Add(protocolVersion);
+        updateMessage.Add((byte)'H');
         updateMessage.AddRange(BitConverter.GetBytes(points));
         byte[] messageToSend = updateMessage.ToArray();
         PlayGamesPlatform.Instance.RealTime.SendMessageToAll(true, messageToSend);

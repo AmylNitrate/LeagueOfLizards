@@ -16,7 +16,7 @@ public class MiniGameTracker : MonoBehaviour {
 
     string lastWinner;
 
-    public int myRHPRange = 50;
+    public int myRHPRange = 60;
 
     void Awake()
     {
@@ -40,12 +40,12 @@ public class MiniGameTracker : MonoBehaviour {
             assessOneWinner = winner;
             if (assessOneWinner == Players.localPlayer)
             {
-                myRHPRange = 15;
+                myRHPRange -= 25;
                 lastWinner = MultiplayerController.Instance.GetMyName();
             }
             else
             {
-                myRHPRange = 20;
+                myRHPRange -= 20;
                 lastWinner = GameData.instance.enemyName;
             }
         }
@@ -56,12 +56,12 @@ public class MiniGameTracker : MonoBehaviour {
             assessTwoWinner = winner;
             if (assessTwoWinner == Players.localPlayer)
             {
-                myRHPRange = 10;
+                myRHPRange -= 15;
                 lastWinner = MultiplayerController.Instance.GetMyName();
             }
             else
             {
-                myRHPRange = 15;
+                myRHPRange -= 10;
                 lastWinner = GameData.instance.enemyName;
             }
         }
@@ -78,26 +78,12 @@ public class MiniGameTracker : MonoBehaviour {
         escalationWinner = winner;
         if (escalationWinner == Players.localPlayer)
         {
-            if (numberOfAssess > 1)
-            {
-                myRHPRange = 5;
-            }
-            else
-            {
-                myRHPRange = 10;
-            }
+            myRHPRange -= 10;
             lastWinner = MultiplayerController.Instance.GetMyName();
         }
         else
         {
-            if (numberOfAssess > 1)
-            {
-                myRHPRange = 10;
-            }
-            else
-            {
-                myRHPRange = 15;
-            }
+            myRHPRange -= 5;
             lastWinner = GameData.instance.enemyName;
         }
     }

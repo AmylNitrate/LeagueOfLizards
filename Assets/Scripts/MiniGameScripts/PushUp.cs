@@ -5,23 +5,34 @@ using UnityEngine.UI;
 
 public class PushUp : MonoBehaviour
 {
+    public static PushUp instance;
 
     Animation anim;
     float timeLeft = 20;
     public bool stop;
     public GameObject gameOver;
 
-    private Text textRef2;
-    private Text textRef3;
+    [SerializeField]
+    Text timerText, pointsValue;
 
+    [SerializeField]
+    Button goToMenu;
+
+    [SerializeField]
+    Bar bar;
+
+    public int myPoints, enemyPoints;
+
+    void Awake()
+    {
+        instance = this;
+    }
 
     void Start()
     {
         //Data.control.points = 0;
         anim = GetComponent<Animation>();
         stop = false;
-        textRef2 = GameObject.Find("Timer").GetComponent<Text>();
-        textRef3 = GameObject.Find("Points").GetComponent<Text>();
     }
 
     void Update()
@@ -33,9 +44,7 @@ public class PushUp : MonoBehaviour
             timeLeft -= Time.deltaTime;
             if (timeLeft < 0)
             {
-                stop = true;
-                gameOver.SetActive(true);
-
+                GameOver();
             }
 
             foreach (AnimationState state in anim)
@@ -44,27 +53,47 @@ public class PushUp : MonoBehaviour
             }
 
 
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && !anim.isPlaying)
             {
                 anim.Play("Take001");
-                if (GameObject.Find("bar").GetComponent<Bar>().Good)
+                if (bar.Good)
                 {
-                    //Data.control.energy -= 1;
-                    //Data.control.points += 2;
+                    myPoints += 5;
                 }
-                if (!GameObject.Find("bar").GetComponent<Bar>().Good)
+                else
                 {
-                    //Data.control.energy -= 2;
-                    //Data.control.points += 1;
+                    myPoints += 1;
                 }
             }
-            if (Input.GetMouseButtonUp(0))
-                anim.Stop("Take001");
+                //anim.Stop("Take001");
         }
 
-        textRef2.text = "Timer = " + (int)timeLeft;
-        //textRef3.text = "Points = " + Data.control.points;
+        timerText.text = "Timer = " + timeLeft.ToString("0.00");
+        pointsValue.text = myPoints.ToString();
     }
 
+    void GameOver()
+    {
+        stop = true;
+        gameOver.SetActive(true);
+        MultiplayerController.Instance.SendMyEscalationPoints(myPoints);
+    }
 
+    public void ComparePoints()
+    {
+        if (myPoints == enemyPoints)
+        {
+            //Tie
+            MiniGameTracker.instance.SetEscalationWinner(MiniGameTracker.Players.localPlayer);
+        }
+        if (myPoints > enemyPoints)
+        {
+            MiniGameTracker.instance.SetEscalationWinner(MiniGameTracker.Players.localPlayer);
+        }
+        else
+        {
+            MiniGameTracker.instance.SetEscalationWinner(MiniGameTracker.Players.enemy);
+        }
+        goToMenu.interactable = true;
+    }
 }

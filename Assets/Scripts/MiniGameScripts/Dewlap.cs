@@ -109,6 +109,11 @@ public class Dewlap : MonoBehaviour
 
     public void ComparePoints()
     {
+        if (myPoints == enemyPoints)
+        {
+            //Tie
+            MiniGameTracker.instance.SetAssessWinner(MiniGameTracker.Players.localPlayer);
+        }
         if (myPoints > enemyPoints)
         {
             MiniGameTracker.instance.SetAssessWinner(MiniGameTracker.Players.localPlayer);

@@ -19,9 +19,13 @@ public class WhackALizardController : MonoBehaviour
     public GameObject gameOver;
     bool stop;
     float timeLeft = 20;
-    private Text textRef2;
-    private Text textRef3;
+    [SerializeField]
+    private Text timerText, pointsValueText;
 
+    [SerializeField]
+    Button goToMenu;
+
+    public int myPoints, enemyPoints;
 
     void Awake()
     {
@@ -34,8 +38,6 @@ public class WhackALizardController : MonoBehaviour
     {
         //Data.control.points = 0;
         stop = false;
-        textRef2 = GameObject.Find("Timer").GetComponent<Text>();
-        textRef3 = GameObject.Find("Points").GetComponent<Text>();
 
     }
 
@@ -46,10 +48,7 @@ public class WhackALizardController : MonoBehaviour
             timeLeft -= Time.deltaTime;
             if (timeLeft < 0)
             {
-                stop = true;
-                gameOver.SetActive(true);
-
-
+                GameOver();
             }
             if (spawnTime <= 0)
             {
@@ -60,9 +59,21 @@ public class WhackALizardController : MonoBehaviour
                 spawnTime -= Time.deltaTime;
             }
         }
-        textRef2.text = "Timer = " + (int)timeLeft;
+        timerText.text = "Timer = " + timeLeft.ToString("0.00");
         //textRef3.text = "Points = " + Data.control.points;
 
+    }
+
+    public void UpdatePoints()
+    {
+        pointsValueText.text = myPoints.ToString();
+    }
+
+    void GameOver()
+    {
+        stop = true;
+        gameOver.SetActive(true);
+        MultiplayerController.Instance.SendMyFightPoints(myPoints);
     }
 
     void GetRandomSpawnTime()
@@ -94,5 +105,23 @@ public class WhackALizardController : MonoBehaviour
             temp.GetComponent<WhackHole>().isOccupied = true;
             GetRandomSpawnTime();
         }
+    }
+
+    public void ComparePoints()
+    {
+        if (myPoints == enemyPoints)
+        {
+            //Tie
+            MiniGameTracker.instance.SetFightWinner(MiniGameTracker.Players.localPlayer);
+        }
+        if (myPoints > enemyPoints)
+        {
+            MiniGameTracker.instance.SetFightWinner(MiniGameTracker.Players.localPlayer);
+        }
+        else
+        {
+            MiniGameTracker.instance.SetFightWinner(MiniGameTracker.Players.enemy);
+        }
+        goToMenu.interactable = true;
     }
 }

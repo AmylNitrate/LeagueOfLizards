@@ -59,12 +59,20 @@ public class WhackLizard : MonoBehaviour {
         //Give points
         if (!isTail)
         {
-            //Data.control.points += 5;
+            WhackALizardController.instance.myPoints += 5;
         }
         else
         {
-            //Data.control.points -= 5;
+            if (WhackALizardController.instance.myPoints > 2)
+            {
+                WhackALizardController.instance.myPoints -= 3;
+            }
+            else
+            {
+                WhackALizardController.instance.myPoints = 0;
+            }
         }
+        WhackALizardController.instance.UpdatePoints();
         Finish();
     }
 }
