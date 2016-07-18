@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Dewlap : MonoBehaviour
 {
+    public static Dewlap instance;
 
     public GameObject dewlap;
     public Collider dewlapCollider;
@@ -15,9 +16,15 @@ public class Dewlap : MonoBehaviour
 
     [SerializeField]
     Text timerTextValue, pointsTextValue;
+    [SerializeField]
+    Button GoToMenu;
 
-    float myPoints, enemyPoints;
+    public int myPoints, enemyPoints;
 
+    void Awake()
+    {
+        instance = this;
+    }
 
     // Use this for initialization
     void Start ()
@@ -77,7 +84,7 @@ public class Dewlap : MonoBehaviour
         stop = true;
 
         //Send points to opponent
-        
+        MultiplayerController.Instance.SendMyAssessPoints(myPoints);
     }
 
     //Lowest points will win
@@ -100,7 +107,7 @@ public class Dewlap : MonoBehaviour
         }
     }
 
-    void ComparePoints()
+    public void ComparePoints()
     {
         if (myPoints > enemyPoints)
         {
@@ -110,6 +117,7 @@ public class Dewlap : MonoBehaviour
         {
             MiniGameTracker.instance.SetAssessWinner(MiniGameTracker.Players.enemy);
         }
+        GoToMenu.interactable = true;
     }
 }
 

@@ -21,6 +21,7 @@ public class MiniGameTracker : MonoBehaviour {
     void Awake()
     {
         instance = this;
+        numberOfAssess = 0;
     }
 
     /// <summary>
@@ -31,8 +32,10 @@ public class MiniGameTracker : MonoBehaviour {
     /// <param name="round">Checks which of the assess rounds it is. Retrieve from GameData</param>
     public void SetAssessWinner(Players winner)
     {
+        Debug.Log("<-----------------------------------------------------------ASSESS WINNER SET-------------------------------------------------->" + numberOfAssess);
         if (numberOfAssess == 0)
         {
+            Debug.Log("-----------------------------------------------------------Set assess round one-----------------------------------------------------------");
             numberOfAssess++;
             assessOneWinner = winner;
             if (assessOneWinner == Players.localPlayer)
@@ -46,8 +49,9 @@ public class MiniGameTracker : MonoBehaviour {
                 lastWinner = GameData.instance.enemyName;
             }
         }
-        if (numberOfAssess == 1)
+        else if (numberOfAssess == 1)
         {
+            Debug.Log("-----------------------------------------------------------Set assess round two-----------------------------------------------------------");
             numberOfAssess++;
             assessTwoWinner = winner;
             if (assessTwoWinner == Players.localPlayer)

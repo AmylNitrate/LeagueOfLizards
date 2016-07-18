@@ -248,6 +248,18 @@ public class GameData : MonoBehaviour {
     void LoadMiniGame()
     {
         Debug.Log("Loading the game: " + myChoice.ToString());
+        if (myChoice == RoundTypes.Assess)
+        {
+            UIManager.instance.GoToLevel("RoundOne");
+        }
+        if (myChoice == RoundTypes.Escalate)
+        {
+            UIManager.instance.GoToLevel("RoundTwo");
+        }
+        if (myChoice == RoundTypes.Fight)
+        {
+            UIManager.instance.GoToLevel("RoundThree");
+        }
         enemyChoice = RoundTypes.none;
         myChoice = RoundTypes.none;
     }

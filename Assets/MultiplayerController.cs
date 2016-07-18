@@ -208,7 +208,7 @@ public class MultiplayerController : RealTimeMultiplayerListener {
         {
             ShowMPMessage("We are connected to the room, start the game");
             SendMyRHP();
-            UIManager.instance.GoToLevel("MiniGameMenu");
+            UIManager.instance.GoToLevel("MultiplayerMenu");
         }
         else
         {
@@ -261,7 +261,7 @@ public class MultiplayerController : RealTimeMultiplayerListener {
         char messageType = (char)data[1];
         switch (messageType)
         {
-            case ('A'):
+            case ('A'): //SendMyRHP()
                 int enemyRHP = BitConverter.ToInt32(data, 2);
                 Debug.Log("Received RHP update message: " + enemyRHP.ToString());
                 if (GameData.instance != null)
@@ -283,29 +283,33 @@ public class MultiplayerController : RealTimeMultiplayerListener {
                     Debug.Log("Game data does not exist");
                 }
                 break;
-            case ('B'):
+            case ('B')://SendAssessRequest()
                 if (ResultsUI.instance != null)
                 {
                     GameData.instance.SetEnemyChoice(GameData.RoundTypes.Assess);
                 }
                 break;
-            case ('C'):
+            case ('C')://SendEscalateRequest()
                 if (ResultsUI.instance != null)
                 {
                     GameData.instance.SetEnemyChoice(GameData.RoundTypes.Escalate);
                 }
                 break;
-            case ('D'):
+            case ('D')://SendFightRequest()
                 if (ResultsUI.instance != null)
                 {
                     GameData.instance.SetEnemyChoice(GameData.RoundTypes.Fight);
                 }
                 break;
-            case ('E'):
+            case ('E')://SendFleeRequest()
                 if (ResultsUI.instance != null)
                 {
                     GameData.instance.SetEnemyChoice(GameData.RoundTypes.RunAway);
                 }
+                break;
+            case ('F'):
+                Dewlap.instance.enemyPoints = BitConverter.ToInt32(data, 2);
+                Dewlap.instance.ComparePoints();
                 break;
         }
     }
@@ -326,6 +330,7 @@ public class MultiplayerController : RealTimeMultiplayerListener {
         PlayGamesPlatform.Instance.RealTime.SendMessageToAll(false, messageToSend);
     }
 
+    //Send requests for rounds for both devices to agree on
     public void SendAssessRequest()
     {
         updateMessage.Clear();
@@ -358,6 +363,17 @@ public class MultiplayerController : RealTimeMultiplayerListener {
         updateMessage.Clear();
         updateMessage.Add(protocolVersion);
         updateMessage.Add((byte)'E');
+        byte[] messageToSend = updateMessage.ToArray();
+        PlayGamesPlatform.Instance.RealTime.SendMessageToAll(true, messageToSend);
+    }
+
+    //Send round specific points
+    public void SendMyAssessPoints(int points)
+    {
+        updateMessage.Clear();
+        updateMessage.Add(protocolVersion);
+        updateMessage.Add((byte)'F');
+        updateMessage.AddRange(BitConverter.GetBytes(points));
         byte[] messageToSend = updateMessage.ToArray();
         PlayGamesPlatform.Instance.RealTime.SendMessageToAll(true, messageToSend);
     }
