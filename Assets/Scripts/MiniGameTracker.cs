@@ -7,16 +7,19 @@ public class MiniGameTracker : MonoBehaviour {
     public static MiniGameTracker instance;
 
     //The two players in the game
-    public enum Players { localPlayer, enemy }
+    public enum Players { localPlayer, enemy, none }
 
     //Player values showing the winners
     Players assessOneWinner, assessTwoWinner, escalationWinner, fightWinner;
+    public Players overallWinner = Players.none;
 
     public int numberOfAssess, numberOfEscalations;
 
     string lastWinner;
 
     public int myRHPRange = 60;
+
+    public string enemyName;
 
     void Awake()
     {
@@ -98,11 +101,16 @@ public class MiniGameTracker : MonoBehaviour {
         if (fightWinner == Players.localPlayer)
         {
             lastWinner = MultiplayerController.Instance.GetMyName();
+            overallWinner = Players.localPlayer;
         }
         else
         {
             lastWinner = GameData.instance.enemyName;
+            overallWinner = Players.enemy;
         }
+        Debug.Log("The winner is: " + winner.ToString());
+        //Game is over at this point
+        //Display name on MultiplayerMenu and have both users exit the room
     }
 
     public int GetNumberOfAssessments()

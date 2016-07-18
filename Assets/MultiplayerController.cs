@@ -208,6 +208,13 @@ public class MultiplayerController : RealTimeMultiplayerListener {
         {
             ShowMPMessage("We are connected to the room, start the game");
             SendMyRHP();
+            foreach(Participant par in PlayGamesPlatform.Instance.RealTime.GetConnectedParticipants())
+            {
+                if (par.DisplayName != PlayGamesPlatform.Instance.RealTime.GetSelf().DisplayName)
+                {
+                    MiniGameTracker.instance.enemyName = par.DisplayName;
+                }
+            }
             UIManager.instance.GoToLevel("MultiplayerMenu");
         }
         else

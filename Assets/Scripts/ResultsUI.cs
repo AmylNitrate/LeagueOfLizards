@@ -11,7 +11,7 @@ public class ResultsUI : MonoBehaviour {
 
     public Text enemyChoseValue, runAwayPanelValue, winnerNameValue;
     
-    public GameObject enemyChosePanel, runAwayPanel, lastWinnerMenu;
+    public GameObject enemyChosePanel, runAwayPanel, lastWinnerMenu, gameCompleteMenu;
 
     [SerializeField]
     Button assessButton, escalateButton;
@@ -26,16 +26,32 @@ public class ResultsUI : MonoBehaviour {
 
     void Start()
     {
-        if (MiniGameTracker.instance.GetNumberOfEscalations() >= 1)
+        if (MiniGameTracker.instance.overallWinner == MiniGameTracker.Players.none)
         {
-            escalateButton.interactable = false;
-            assessButton.interactable = false;
+            if (MiniGameTracker.instance.GetNumberOfEscalations() >= 1)
+            {
+                escalateButton.interactable = false;
+                assessButton.interactable = false;
+            }
+            if (MiniGameTracker.instance.GetNumberOfAssessments() >= 2)
+            {
+                assessButton.interactable = false;
+            }
+            GetRHP(MiniGameTracker.instance.myRHPRange);
         }
-        if (MiniGameTracker.instance.GetNumberOfAssessments() >= 2)
+        else
         {
-            assessButton.interactable = false;
+            Debug.Log("Game over: " + MiniGameTracker.instance.overallWinner.ToString());
+            gameCompleteMenu.SetActive(true);
+            if (MiniGameTracker.instance.overallWinner == MiniGameTracker.Players.localPlayer)
+            {
+                winnerNameValue.text = "You";
+            }
+            else
+            {
+                winnerNameValue.text = MiniGameTracker.instance.enemyName;
+            }
         }
-        GetRHP(MiniGameTracker.instance.myRHPRange);
     }
 
     /// <summary>
