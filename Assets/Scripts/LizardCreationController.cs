@@ -8,7 +8,7 @@ public class LizardCreationController : MonoBehaviour {
     GameObject outOfPointsPanel;
 
     [SerializeField]
-    Text specPointsValue, gathererPoints, learnerPoints, fitPoints, durablePoints;
+    Text specPointsValue, gathererPoints, learnerPoints, fitPoints, durablePoints, levelText, XPText;
 
 	void Awake()
     {
@@ -24,6 +24,8 @@ public class LizardCreationController : MonoBehaviour {
         learnerPoints.text = Lizard.current.learnerPoints.ToString();
         fitPoints.text = Lizard.current.fitPoints.ToString();
         durablePoints.text = Lizard.current.durablePoints.ToString();
+        levelText.text = Lizard.current.level.ToString();
+        XPText.text = Lizard.current.experiencePoints.ToString() + "/" + Lizard.current.experienceGoal.ToString();
     }
 
     /// <summary>

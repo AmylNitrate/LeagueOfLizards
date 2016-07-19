@@ -15,7 +15,9 @@ public class Lizard{
     public float losingXPModifier;
     //10% less RHP cost for every point in durable (1 - (durablePoints * 0.1))
     public float actionCostModifier;
-    public int experiencePoints, level;
+    public int experiencePoints, level, experienceGoal = 100;
+
+    public int lastLevel = 1;
 
     public enum SpecTypes { learner, gatherer, durable, fit }
 
@@ -84,7 +86,7 @@ public class Lizard{
     void AddLearnerPoint()
     {
         learnerPoints++;
-        losingXPModifier += 0.25f;
+        losingXPModifier += 0.5f;
     }
 
     /// <summary>
@@ -93,7 +95,7 @@ public class Lizard{
     void AddDurablePoint()
     {
         durablePoints++;
-        actionCostModifier *= 0.9f;
+        actionCostModifier *= 0.95f;
     }
 
     /// <summary>
@@ -141,5 +143,33 @@ public class Lizard{
         {
             return false;
         }
+    }
+
+    public void GiveXP(int xpVal, bool lost)
+    {
+        if (lost)
+        {
+            experiencePoints += Mathf.RoundToInt((xpVal * losingXPModifier));
+        }
+        else
+        {
+            experiencePoints += xpVal;
+        }
+        Debug.Log(experiencePoints + " experience points");
+        SaveLoad.Save();
+        CheckForLevel();
+    }
+
+    public void CheckForLevel()
+    {
+        Debug.Log("Next experience goal" + experienceGoal);
+        if (experiencePoints >= experienceGoal)
+        {
+            Debug.Log("<-----------------------------Level Up------------------------>");
+            experienceGoal += 100;
+            level++;
+            specPoints += 3;
+        }
+        SaveLoad.Save();
     }
 }

@@ -28,12 +28,12 @@ public class Bar : MonoBehaviour
             //Debug.Log(gameObject.transform.position.z);
             if (Down)
             {
-                gameObject.transform.Translate(0, 0, -speed);
+                gameObject.transform.Translate(0, 0, -speed * Time.deltaTime);
 
             }
             else if (!Down)
             {
-                gameObject.transform.Translate(0, 0, speed);
+                gameObject.transform.Translate(0, 0, speed * Time.deltaTime);
             }
         }
 

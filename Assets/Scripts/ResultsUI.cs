@@ -71,7 +71,14 @@ public class ResultsUI : MonoBehaviour {
         int opponentRHPVal = GameData.instance.enemyCurrentRHP;
         int rangeMax = opponentRHPVal + temp;
         int rangeMin = opponentRHPVal - (range - temp);
-        opponentRHP.text = rangeMin.ToString() + " - " + rangeMax.ToString();
+        if(rangeMin >= 0)
+        {
+            opponentRHP.text = rangeMin.ToString() + " - " + rangeMax.ToString();
+        }
+        else
+        {
+            opponentRHP.text = "0 - " + rangeMax.ToString();
+        }
     }
 
     /// <summary>

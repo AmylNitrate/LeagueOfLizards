@@ -134,10 +134,12 @@ public class MiniGameTracker : MonoBehaviour {
         if (GameData.instance.enemyCurrentRHP > Lizard.current.myRHPRemaining)
         {
             overallWinner = Players.enemy;
+            Lizard.current.GiveXP(12, true);
         }
         else
         {
             overallWinner = Players.localPlayer;
+            Lizard.current.GiveXP(50, false);
         }
     }
 }

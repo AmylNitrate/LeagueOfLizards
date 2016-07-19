@@ -11,7 +11,7 @@ public class MainMenu : MonoBehaviour {
 
     bool signedIn;
 
-    public GameObject incomingInvitationPanel, bugSuccessPanel, bugFailPanel;
+    public GameObject incomingInvitationPanel, bugSuccessPanel, bugFailPanel, levelUpPopUp, useBugPopUp, timeOutPopUp;
 
     void Awake()
     {
@@ -19,6 +19,21 @@ public class MainMenu : MonoBehaviour {
         instance = this;
         SaveLoad.Load();
         numberOfBugs.text = Lizard.current.regenBugs.ToString();
+        if (Lizard.current.level > Lizard.current.lastLevel)
+        {
+            levelUpPopUp.SetActive(true);
+            Lizard.current.lastLevel = Lizard.current.level;
+            Debug.Log("Levelled up to " + Lizard.current.level + " and last " + Lizard.current.lastLevel);
+            SaveLoad.Save();
+        }
+        if (Lizard.current.myRHPRemaining <= 0 && Lizard.current.regenBugs > 0)
+        {
+            useBugPopUp.SetActive(true);
+        }
+        else if (Lizard.current.myRHPRemaining <= 0 && Lizard.current.regenBugs <= 0)
+        {
+            timeOutPopUp.SetActive(true);
+        }
     }
 
     void Update()
