@@ -17,6 +17,8 @@ public class MiniGameTracker : MonoBehaviour {
 
     string lastWinner;
 
+    public bool fought;
+
     public int myRHPRange = 60;
 
     public string enemyName;
@@ -43,12 +45,12 @@ public class MiniGameTracker : MonoBehaviour {
             assessOneWinner = winner;
             if (assessOneWinner == Players.localPlayer)
             {
-                myRHPRange -= 25;
+                myRHPRange -= 10;
                 lastWinner = MultiplayerController.Instance.GetMyName();
             }
             else
             {
-                myRHPRange -= 20;
+                myRHPRange -= 5;
                 lastWinner = GameData.instance.enemyName;
             }
         }
@@ -59,12 +61,12 @@ public class MiniGameTracker : MonoBehaviour {
             assessTwoWinner = winner;
             if (assessTwoWinner == Players.localPlayer)
             {
-                myRHPRange -= 15;
+                myRHPRange -= 5;
                 lastWinner = MultiplayerController.Instance.GetMyName();
             }
             else
             {
-                myRHPRange -= 10;
+                myRHPRange -= 2;
                 lastWinner = GameData.instance.enemyName;
             }
         }
@@ -82,12 +84,12 @@ public class MiniGameTracker : MonoBehaviour {
         escalationWinner = winner;
         if (escalationWinner == Players.localPlayer)
         {
-            myRHPRange -= 10;
+            myRHPRange -= 15;
             lastWinner = MultiplayerController.Instance.GetMyName();
         }
         else
         {
-            myRHPRange -= 5;
+            myRHPRange -= 10;
             lastWinner = GameData.instance.enemyName;
         }
         MultiplayerController.Instance.SendMyRHP();
@@ -103,13 +105,13 @@ public class MiniGameTracker : MonoBehaviour {
         if (fightWinner == Players.localPlayer)
         {
             lastWinner = MultiplayerController.Instance.GetMyName();
-            overallWinner = Players.localPlayer;
         }
         else
         {
             lastWinner = GameData.instance.enemyName;
-            overallWinner = Players.enemy;
+            Lizard.current.myRHPRemaining -= 10;
         }
+        fought = true;
         Debug.Log("The winner is: " + winner.ToString());
         MultiplayerController.Instance.SendMyRHP();
         //Game is over at this point
@@ -124,5 +126,18 @@ public class MiniGameTracker : MonoBehaviour {
     public int GetNumberOfEscalations()
     {
         return numberOfEscalations;
+    }
+
+    public void SetWinner()
+    {
+        Debug.Log("Enemy RHP at SetWinner(): " + GameData.instance.enemyCurrentRHP);
+        if (GameData.instance.enemyCurrentRHP > Lizard.current.myRHPRemaining)
+        {
+            overallWinner = Players.enemy;
+        }
+        else
+        {
+            overallWinner = Players.localPlayer;
+        }
     }
 }

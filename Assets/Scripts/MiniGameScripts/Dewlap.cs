@@ -9,7 +9,7 @@ public class Dewlap : MonoBehaviour
 
     public GameObject dewlap;
     public Collider dewlapCollider;
-    float timeLeft = 15;
+    float timeLeft = 10;
 
     public GameObject gameOver;
     bool stop;

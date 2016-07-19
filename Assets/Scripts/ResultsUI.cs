@@ -26,6 +26,10 @@ public class ResultsUI : MonoBehaviour {
 
     void Start()
     {
+        if (MiniGameTracker.instance.fought)
+        {
+            MiniGameTracker.instance.SetWinner();
+        }
         if (MiniGameTracker.instance.overallWinner == MiniGameTracker.Players.none)
         {
             if (MiniGameTracker.instance.GetNumberOfEscalations() >= 1)
