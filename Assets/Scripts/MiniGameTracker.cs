@@ -68,6 +68,7 @@ public class MiniGameTracker : MonoBehaviour {
                 lastWinner = GameData.instance.enemyName;
             }
         }
+        MultiplayerController.Instance.SendMyRHP();
     }
 
     /// <summary>
@@ -89,6 +90,7 @@ public class MiniGameTracker : MonoBehaviour {
             myRHPRange -= 5;
             lastWinner = GameData.instance.enemyName;
         }
+        MultiplayerController.Instance.SendMyRHP();
     }
 
     /// <summary>
@@ -109,6 +111,7 @@ public class MiniGameTracker : MonoBehaviour {
             overallWinner = Players.enemy;
         }
         Debug.Log("The winner is: " + winner.ToString());
+        MultiplayerController.Instance.SendMyRHP();
         //Game is over at this point
         //Display name on MultiplayerMenu and have both users exit the room
     }

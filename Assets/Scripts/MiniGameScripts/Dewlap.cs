@@ -50,10 +50,6 @@ public class Dewlap : MonoBehaviour
             {
                 dewlap.transform.Translate((float)-0.01, (float)0.01, 0);
             }
-            else if(dewlap.transform.position.x > 1.8)
-            {
-                Debug.Log("Stop");
-            }
 
             if (Input.GetMouseButtonDown(0) && dewlap.transform.position.x > 1.4)
             {
@@ -67,10 +63,6 @@ public class Dewlap : MonoBehaviour
                         myPoints++;
                         GetPointsValue();
                     }
-            }
-            else if(dewlap.transform.position.x < 1.4)
-            {
-                Debug.Log("STOP");
             }
         }
 

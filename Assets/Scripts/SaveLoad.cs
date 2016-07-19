@@ -33,4 +33,9 @@ public class SaveLoad {
             Save();
         }
     }
+
+    public static void DeleteSave()
+    {
+        File.Delete(Application.persistentDataPath + "/savedGame.arl");
+    }
 }

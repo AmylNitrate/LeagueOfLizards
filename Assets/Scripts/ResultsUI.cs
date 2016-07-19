@@ -121,4 +121,23 @@ public class ResultsUI : MonoBehaviour {
         lastWinnerMenu.SetActive(true);
         winnerNameValue.text = winnerName;
     }
+
+    public void SetRoundInfo(string round)
+    {
+        switch (round)
+        {
+            case "Assess":
+                RoundDescriptionPanel.instance.SetPanelInfo(GameData.RoundTypes.Assess);
+                break;
+            case "Escalate":
+                RoundDescriptionPanel.instance.SetPanelInfo(GameData.RoundTypes.Escalate);
+                break;
+            case "Fight":
+                RoundDescriptionPanel.instance.SetPanelInfo(GameData.RoundTypes.Fight);
+                break;
+            case "Flee":
+                RoundDescriptionPanel.instance.SetPanelInfo(GameData.RoundTypes.RunAway);
+                break;
+        }
+    }
 }

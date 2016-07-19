@@ -13,6 +13,11 @@ public class LizardCreationController : MonoBehaviour {
 	void Awake()
     {
         SaveLoad.Load();
+        DisplayInfo();
+    }
+
+    public void DisplayInfo()
+    {
         Debug.Log("Lizard rhp = " + Lizard.current.myMaxRHP);
         specPointsValue.text = Lizard.current.specPoints.ToString();
         gathererPoints.text = Lizard.current.gathererPoints.ToString();
@@ -91,5 +96,14 @@ public class LizardCreationController : MonoBehaviour {
         {
             outOfPointsPanel.SetActive(true);
         }
+    }
+
+    /// <summary>
+    /// Deletes the save file and creates a new lizard to save
+    /// </summary>
+    public void DeleteLizard()
+    {
+        SaveLoad.DeleteSave();
+        SaveLoad.Load(); //This creates a new lizard if a file is not found
     }
 }

@@ -30,8 +30,8 @@ public class Lizard{
         myRHPRemaining = myMaxRHP;
         //Every lizard gets 3 spec points to start with
         specPoints = 3;
-        //Users start with no regen bugs
-        regenBugs = 0;
+        //Users start with 3 regen bugs
+        regenBugs = 3;
         //There are no spec points yet because they haven't been specced
         learnerPoints = 0;
         gathererPoints = 0;
@@ -113,5 +113,33 @@ public class Lizard{
         fitPoints++;
         myMaxRHP += 5;
         myRHPRemaining = myMaxRHP;
+    }
+
+    public void TakeAwayRHP(int val)
+    {
+        myRHPRemaining -= val;
+        SaveLoad.Save();
+    }
+
+    public bool UseRegenBug()
+    {
+        if (regenBugs > 0)
+        {
+            if (myRHPRemaining < myMaxRHP)
+            {
+                regenBugs--;
+                myRHPRemaining = myMaxRHP;
+                SaveLoad.Save();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
     }
 }

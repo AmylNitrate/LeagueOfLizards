@@ -259,12 +259,15 @@
     <Compile Include="Assets\Scripts\MiniGameScripts\WhackHole.cs" />
     <Compile Include="Assets\Scripts\MiniGameScripts\WhackLizard.cs" />
     <Compile Include="Assets\Scripts\MiniGameTracker.cs" />
+    <Compile Include="Assets\Scripts\Misc\BugFail.cs" />
+    <Compile Include="Assets\Scripts\Misc\WaitingForOpponent.cs" />
     <Compile Include="Assets\Scripts\MultiplayerLobby.cs" />
     <Compile Include="Assets\Scripts\OpenURL.cs" />
     <Compile Include="Assets\Scripts\QuizAnswer.cs" />
     <Compile Include="Assets\Scripts\QuizBrain.cs" />
     <Compile Include="Assets\Scripts\QuizQuestion.cs" />
     <Compile Include="Assets\Scripts\ResultsUI.cs" />
+    <Compile Include="Assets\Scripts\RoundDescriptionPanel.cs" />
     <Compile Include="Assets\Scripts\SaveLoad.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\MiniGMenuUI.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\RetainedUserPicksScript.cs" />

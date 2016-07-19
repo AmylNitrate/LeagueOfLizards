@@ -7,17 +7,18 @@ public class MainMenu : MonoBehaviour {
     public static MainMenu instance;
 
     [SerializeField]
-    Text invitationCounter, inviterName;
+    Text invitationCounter, inviterName, numberOfBugs;
 
     bool signedIn;
 
-    public GameObject incomingInvitationPanel;
+    public GameObject incomingInvitationPanel, bugSuccessPanel, bugFailPanel;
 
     void Awake()
     {
         MultiplayerController.Instance.TrySignIn();
         instance = this;
         SaveLoad.Load();
+        numberOfBugs.text = Lizard.current.regenBugs.ToString();
     }
 
     void Update()
@@ -59,5 +60,18 @@ public class MainMenu : MonoBehaviour {
         yield return new WaitForSeconds(1f);
         invitationCounter.text = MultiplayerController.Instance.GetInviteNumber().ToString();
         StartCoroutine(CheckForInvites());
+    }
+
+    public void UseBug()
+    {
+        if (Lizard.current.UseRegenBug())
+        {
+            bugSuccessPanel.SetActive(true);
+        }
+        else
+        {
+            bugFailPanel.SetActive(true);
+        }
+        numberOfBugs.text = Lizard.current.regenBugs.ToString();
     }
 }

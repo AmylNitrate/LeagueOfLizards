@@ -251,14 +251,17 @@ public class GameData : MonoBehaviour {
         if (myChoice == RoundTypes.Assess)
         {
             UIManager.instance.GoToLevel("RoundOne");
+            Lizard.current.TakeAwayRHP(5);
         }
         if (myChoice == RoundTypes.Escalate)
         {
             UIManager.instance.GoToLevel("RoundTwo");
+            Lizard.current.TakeAwayRHP(10);
         }
         if (myChoice == RoundTypes.Fight)
         {
             UIManager.instance.GoToLevel("RoundThree");
+            Lizard.current.TakeAwayRHP(20);
         }
         enemyChoice = RoundTypes.none;
         myChoice = RoundTypes.none;
