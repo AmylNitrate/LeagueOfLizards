@@ -113,6 +113,15 @@ public class ResultsUI : MonoBehaviour {
             case "Run":
                 Debug.Log("Run away request sent");
                 GameData.instance.SetMyChoice(GameData.RoundTypes.RunAway);
+                if (GameData.instance.myCurrentRHP < GameData.instance.enemyCurrentRHP)
+                {
+                    Debug.Log("Awarded running away XP");
+                    MiniGameTracker.instance.GiveXP(30);
+                }
+                else
+                {
+                    Debug.Log("You have chosen poorly");
+                }
                 //Send message to opponent and close game
                 break;
         }

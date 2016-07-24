@@ -142,4 +142,9 @@ public class MiniGameTracker : MonoBehaviour {
             Lizard.current.GiveXP(50, false);
         }
     }
+
+    public void GiveXP(int i)
+    {
+        Lizard.current.GiveXP(i, false);
+    }
 }
