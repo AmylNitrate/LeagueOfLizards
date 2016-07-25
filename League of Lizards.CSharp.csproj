@@ -69,9 +69,42 @@
     <Reference Include="UnityEditor.iOS.Extensions.Common">
       <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Common.dll</HintPath>
     </Reference>
+    <Reference Include="GameSparks.Api">
+      <HintPath>Assets\Plugins\GameSparks.Api.dll</HintPath>
+    </Reference>
+    <Reference Include="GameSparksRT">
+      <HintPath>Assets\Plugins\GameSparksRT.dll</HintPath>
+    </Reference>
+    <Reference Include="GameSparks">
+      <HintPath>Assets\Plugins\GameSparks.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Assets\Plugins\Newtonsoft.Json.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Constants.cs" />
+    <Compile Include="Assets\GameSparks\GameSparksRTUnity.cs" />
+    <Compile Include="Assets\GameSparks\GameSparksSettings.cs" />
+    <Compile Include="Assets\GameSparks\GameSparksUnity.cs" />
+    <Compile Include="Assets\GameSparks\MyGameSparks.cs" />
+    <Compile Include="Assets\GameSparks\Platforms\DefaultPlatform.cs" />
+    <Compile Include="Assets\GameSparks\Platforms\IControlledTimer.cs" />
+    <Compile Include="Assets\GameSparks\Platforms\IControlledWebSocket.cs" />
+    <Compile Include="Assets\GameSparks\Platforms\IOS\IOSPlatform.cs" />
+    <Compile Include="Assets\GameSparks\Platforms\IOS\IOSWebSocket.cs" />
+    <Compile Include="Assets\GameSparks\Platforms\Native\NativePlatform.cs" />
+    <Compile Include="Assets\GameSparks\Platforms\Native\NativeWebSocket.cs" />
+    <Compile Include="Assets\GameSparks\Platforms\Native\detail\GameSparksNative.cs" />
+    <Compile Include="Assets\GameSparks\Platforms\Native\detail\GameSparksNativePINVOKE.cs" />
+    <Compile Include="Assets\GameSparks\Platforms\Native\detail\NativeWebSocket.cs" />
+    <Compile Include="Assets\GameSparks\Platforms\PlatformBase.cs" />
+    <Compile Include="Assets\GameSparks\Platforms\TimerController.cs" />
+    <Compile Include="Assets\GameSparks\Platforms\UnityTimer.cs" />
+    <Compile Include="Assets\GameSparks\Platforms\WebGL\WebGLPlatform.cs" />
+    <Compile Include="Assets\GameSparks\Platforms\WebGL\WebGLWebSocket.cs" />
+    <Compile Include="Assets\GameSparks\Platforms\WebSocketController.cs" />
+    <Compile Include="Assets\GameSparks\TestUI\GameSparksTestUI.cs" />
     <Compile Include="Assets\GooglePlayGames\BasicApi\Achievement.cs" />
     <Compile Include="Assets\GooglePlayGames\BasicApi\CommonStatusCodes.cs" />
     <Compile Include="Assets\GooglePlayGames\BasicApi\CommonTypes.cs" />
@@ -251,6 +284,7 @@
     <Compile Include="Assets\GooglePlayGames\PluginVersion.cs" />
     <Compile Include="Assets\MultiplayerController.cs" />
     <Compile Include="Assets\Scripts\GameData.cs" />
+    <Compile Include="Assets\Scripts\GameInfo.cs" />
     <Compile Include="Assets\Scripts\Lizard.cs" />
     <Compile Include="Assets\Scripts\LizardCreationController.cs" />
     <Compile Include="Assets\Scripts\MainMenu.cs" />
@@ -271,18 +305,28 @@
     <Compile Include="Assets\Scripts\QuizQuestion.cs" />
     <Compile Include="Assets\Scripts\ResultsUI.cs" />
     <Compile Include="Assets\Scripts\RoundDescriptionPanel.cs" />
+    <Compile Include="Assets\Scripts\RoundInfo.cs" />
     <Compile Include="Assets\Scripts\SaveLoad.cs" />
+    <Compile Include="Assets\Scripts\SaveToGameSparks.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\MiniGMenuUI.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\RetainedUserPicksScript.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\StatMenuUI.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\UIManager.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\GameSparks\link.xml" />
     <None Include="Assets\GooglePlayGames\Editor\Podfile.txt" />
     <None Include="Assets\GooglePlayGames\Editor\template-AndroidManifest.txt" />
     <None Include="Assets\GooglePlayGames\Editor\template-Constants.txt" />
     <None Include="Assets\GooglePlayGames\Editor\template-GameInfo.txt" />
     <None Include="Assets\Plugins\Android\MainLibProj\AndroidManifest.xml" />
+    <None Include="Assets\Plugins\GameSparks.Api.XML" />
+    <None Include="Assets\Plugins\GameSparks.XML" />
+    <None Include="Assets\Plugins\GameSparksRT.xml" />
+    <None Include="Assets\Plugins\Metro\GameSparks.XML" />
+    <None Include="Assets\Plugins\Metro\GameSparksRT.xml" />
+    <None Include="Assets\Plugins\Newtonsoft.Json.xml" />
+    <None Include="Assets\Plugins\WP8\GameSparks.XML" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

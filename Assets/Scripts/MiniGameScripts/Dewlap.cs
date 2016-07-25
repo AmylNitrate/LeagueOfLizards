@@ -114,6 +114,16 @@ public class Dewlap : MonoBehaviour
         {
             MiniGameTracker.instance.SetAssessWinner(MiniGameTracker.Players.enemy);
         }
+        if (GameInfo.current.isKeepingTrack)
+        {
+            RoundInfo.current.userOneMiniGameScore = myPoints;
+            RoundInfo.current.userTwoMiniGameScore = enemyPoints;
+        }
+        else
+        {
+            RoundInfo.current.userTwoMiniGameScore = myPoints;
+            RoundInfo.current.userOneMiniGameScore = enemyPoints;
+        }
         GoToMenu.interactable = true;
     }
 }

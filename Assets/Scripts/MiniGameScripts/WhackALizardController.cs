@@ -122,6 +122,16 @@ public class WhackALizardController : MonoBehaviour
         {
             MiniGameTracker.instance.SetFightWinner(MiniGameTracker.Players.enemy);
         }
+        if (GameInfo.current.isKeepingTrack)
+        {
+            RoundInfo.current.userOneMiniGameScore = myPoints;
+            RoundInfo.current.userTwoMiniGameScore = enemyPoints;
+        }
+        else
+        {
+            RoundInfo.current.userTwoMiniGameScore = myPoints;
+            RoundInfo.current.userOneMiniGameScore = enemyPoints;
+        }
         goToMenu.interactable = true;
     }
 }

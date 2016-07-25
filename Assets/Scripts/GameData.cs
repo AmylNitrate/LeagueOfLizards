@@ -26,6 +26,9 @@ public class GameData : MonoBehaviour {
     //Enemy name
     public string enemyName;
 
+    //Number of rounds played
+    public int roundsPlayed = 0;
+
     //Checking the number of rounds completed so that players can not do too many assess or escalation rounds
     int assessRoundsComplete, escalationRoundsComplete;
 
@@ -58,12 +61,16 @@ public class GameData : MonoBehaviour {
         //Gets round info for the dictionary
         PopDictionary();
         //Getting the participant ID of the player's opponent
+        Participant[] parts = new Participant[2];
+        int i = 0;
         foreach (Participant part in MultiplayerController.Instance.GetAllPlayers())
         {
             if (part.ParticipantId != MultiplayerController.Instance.GetParticipantID())
             {
                 enemyParticipant = part;
             }
+            parts[i] = part;
+            i++;
         }
         //Read from save file
         myCurrentRHP = Lizard.current.myRHPRemaining;
@@ -71,6 +78,17 @@ public class GameData : MonoBehaviour {
         //enemyCurrentRHP = 
         //Set current round
         currentRoundValue = roundValues[RoundTypes.Assess];
+        //Create the game info tracking object
+        Debug.Log("Creating new GameInfo=========================================================================>>>>>>>>> " + i);
+        //GameInfo.current = new GameInfo(parts[0].DisplayName, parts[1].DisplayName);
+        GameInfo.current = new GameInfo();
+        Debug.Log("GameInfo created =========================================================================>>>>>>>>>");
+        //If the first in the array is not the enemy then it must be the player
+        if (parts[0].ParticipantId != enemyParticipant.ParticipantId)
+        {
+            //Therefore the local user will be the one keeping track of the information
+            GameInfo.current.isKeepingTrack = true;
+        }
     }
 
     void OnLevelWasLoaded(int level)
@@ -177,6 +195,15 @@ public class GameData : MonoBehaviour {
     public void SetEnemyChoice(RoundTypes type)
     {
         enemyChoice = type;
+        //Setting the choices of players dependant on who is keeping track
+        if (GameInfo.current.isKeepingTrack)
+        {
+            RoundInfo.current.userTwoMiniGameChoice = type.ToString();
+        }
+        else
+        {
+            RoundInfo.current.userOneMiniGameChoice = type.ToString();
+        }
         CheckChoices();
     }
 
@@ -202,6 +229,15 @@ public class GameData : MonoBehaviour {
                 MultiplayerController.Instance.SendFleeRequest();
                 break;
         }
+        //Setting the choices of players dependant on who is keeping track
+        if (GameInfo.current.isKeepingTrack)
+        {
+            RoundInfo.current.userOneMiniGameChoice = type.ToString();
+        }
+        else
+        {
+            RoundInfo.current.userTwoMiniGameChoice = type.ToString();
+        }
         CheckChoices();
     }
 
@@ -216,6 +252,7 @@ public class GameData : MonoBehaviour {
             //If either player is trying to run away, inform the other player and set them as the winner
             if (myChoice == RoundTypes.RunAway || enemyChoice == RoundTypes.RunAway)
             {
+                roundsPlayed++;
                 ResultsUI.instance.runAwayPanel.SetActive(true);
                 if (myChoice == RoundTypes.RunAway)
                 {
@@ -226,10 +263,13 @@ public class GameData : MonoBehaviour {
                     ResultsUI.instance.runAwayPanelValue.text = "Your enemy has run away\n\nYou have won";
                     MiniGameTracker.instance.GiveXP(50);
                 }
+                GameInfo.current.SendToGameSparks();
             }
             //If both choices match then load the correct scene
             else if (enemyChoice == myChoice)
             {
+                roundsPlayed++;
+                RoundInfo.current.miniGameOutcome = myChoice.ToString();
                 LoadMiniGame();
             }
             //If the enemy's choice has a higher value than the local players choice then the local player will need to select again

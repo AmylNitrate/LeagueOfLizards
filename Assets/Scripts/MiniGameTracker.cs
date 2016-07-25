@@ -71,6 +71,33 @@ public class MiniGameTracker : MonoBehaviour {
             }
         }
         MultiplayerController.Instance.SendMyRHP();
+        if (winner == Players.enemy)
+        {
+            if (GameInfo.current.isKeepingTrack)
+            {
+                RoundInfo.current.miniGameWinner = RoundInfo.current.userTwoName;
+            }
+            else
+            {
+                RoundInfo.current.miniGameWinner = RoundInfo.current.userOneName;
+            }
+        }
+        else if (winner == Players.localPlayer)
+        {
+            if (GameInfo.current.isKeepingTrack)
+            {
+                RoundInfo.current.miniGameWinner = RoundInfo.current.userOneName;
+            }
+            else
+            {
+                RoundInfo.current.miniGameWinner = RoundInfo.current.userTwoName;
+            }
+        }
+        else
+        {
+            RoundInfo.current.miniGameWinner = "Draw";
+        }
+        GameInfo.current.NextRound();
     }
 
     /// <summary>
@@ -93,6 +120,33 @@ public class MiniGameTracker : MonoBehaviour {
             lastWinner = GameData.instance.enemyName;
         }
         MultiplayerController.Instance.SendMyRHP();
+        if (winner == Players.enemy)
+        {
+            if (GameInfo.current.isKeepingTrack)
+            {
+                RoundInfo.current.miniGameWinner = RoundInfo.current.userTwoName;
+            }
+            else
+            {
+                RoundInfo.current.miniGameWinner = RoundInfo.current.userOneName;
+            }
+        }
+        else if (winner == Players.localPlayer)
+        {
+            if (GameInfo.current.isKeepingTrack)
+            {
+                RoundInfo.current.miniGameWinner = RoundInfo.current.userOneName;
+            }
+            else
+            {
+                RoundInfo.current.miniGameWinner = RoundInfo.current.userTwoName;
+            }
+        }
+        else
+        {
+            RoundInfo.current.miniGameWinner = "Draw";
+        }
+        GameInfo.current.NextRound();
     }
 
     /// <summary>
@@ -113,7 +167,33 @@ public class MiniGameTracker : MonoBehaviour {
         }
         fought = true;
         Debug.Log("The winner is: " + winner.ToString());
-        MultiplayerController.Instance.SendMyRHP();
+        MultiplayerController.Instance.SendMyRHP(); if (winner == Players.enemy)
+        {
+            if (GameInfo.current.isKeepingTrack)
+            {
+                RoundInfo.current.miniGameWinner = RoundInfo.current.userTwoName;
+            }
+            else
+            {
+                RoundInfo.current.miniGameWinner = RoundInfo.current.userOneName;
+            }
+        }
+        else if (winner == Players.localPlayer)
+        {
+            if (GameInfo.current.isKeepingTrack)
+            {
+                RoundInfo.current.miniGameWinner = RoundInfo.current.userOneName;
+            }
+            else
+            {
+                RoundInfo.current.miniGameWinner = RoundInfo.current.userTwoName;
+            }
+        }
+        else
+        {
+            RoundInfo.current.miniGameWinner = "Draw";
+        }
+        GameInfo.current.NextRound();
         //Game is over at this point
         //Display name on MultiplayerMenu and have both users exit the room
     }
@@ -141,6 +221,7 @@ public class MiniGameTracker : MonoBehaviour {
             overallWinner = Players.localPlayer;
             Lizard.current.GiveXP(50, false);
         }
+        GameInfo.current.SendToGameSparks();
     }
 
     public void GiveXP(int i)
