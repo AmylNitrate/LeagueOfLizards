@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 using GooglePlayGames;
@@ -45,12 +46,9 @@ public class GameData : MonoBehaviour {
         {
             DestroyImmediate(this.gameObject);
         }
-    }
-
-    void Start()
-    {
         GetData();
     }
+
 
     /// <summary>
     /// Retrieves data from MultiplayerController and the save file, performed on scene load
@@ -69,9 +67,20 @@ public class GameData : MonoBehaviour {
         }
         //Read from save file
         myCurrentRHP = Lizard.current.myRHPRemaining;
+        Debug.Log("My current RHP = " + myCurrentRHP);
         //enemyCurrentRHP = 
         //Set current round
         currentRoundValue = roundValues[RoundTypes.Assess];
+    }
+
+    void OnLevelWasLoaded(int level)
+    {
+        Debug.Log("Level loaded");
+        if (SceneManager.GetActiveScene().name == "Menu")
+        {
+            Destroy(this.gameObject);
+            Debug.Log("Destroying game data object because of main menu");
+        }
     }
 
     /// <summary>

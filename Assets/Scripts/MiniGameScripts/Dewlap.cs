@@ -106,7 +106,7 @@ public class Dewlap : MonoBehaviour
             //Tie
             MiniGameTracker.instance.SetAssessWinner(MiniGameTracker.Players.localPlayer);
         }
-        if (myPoints > enemyPoints)
+        else if (myPoints > enemyPoints)
         {
             MiniGameTracker.instance.SetAssessWinner(MiniGameTracker.Players.localPlayer);
         }

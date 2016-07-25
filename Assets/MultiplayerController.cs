@@ -278,7 +278,7 @@ public class MultiplayerController : RealTimeMultiplayerListener {
                     if (ResultsUI.instance != null)
                     {
                         Debug.Log("resultsui Not null");
-                        ResultsUI.instance.GetRHP(50);
+                        //ResultsUI.instance.GetRHP(50);
                     }
                     else
                     {

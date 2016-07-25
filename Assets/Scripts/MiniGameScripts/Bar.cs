@@ -10,11 +10,12 @@ public class Bar : MonoBehaviour
     bool Down;
     bool Up;
     public bool Good;
+    [SerializeField]
     float speed;
     // Use this for initialization
     void Start ()
     {
-        speed = (float)0.1;
+        //speed = 5;
         Down = true;
         Good = false;
 
@@ -64,7 +65,6 @@ public class Bar : MonoBehaviour
     {
         if(col == goodZone)
         {
-            speed = (float)0.1;
             Good = false;
         }
 

@@ -41,7 +41,14 @@ public class ResultsUI : MonoBehaviour {
             {
                 assessButton.interactable = false;
             }
-            GetRHP(MiniGameTracker.instance.myRHPRange);
+            if (MiniGameTracker.instance.GetNumberOfAssessments() == 0 && MiniGameTracker.instance.GetNumberOfEscalations() == 0 && !MiniGameTracker.instance.fought)
+            {
+                opponentRHP.text = "???";
+            }
+            else
+            {
+                GetRHP(MiniGameTracker.instance.myRHPRange);
+            }
         }
         else
         {
