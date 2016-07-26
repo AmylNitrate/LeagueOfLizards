@@ -85,6 +85,11 @@ public class GameData : MonoBehaviour {
         }
         playerOneName = parts[0].DisplayName;
         playerTwoName = parts[1].DisplayName;
+        GameInfo.current.userOne = playerOneName;
+        GameInfo.current.userTwo = playerTwoName;
+        RoundInfo.current.userOneName = playerOneName;
+        RoundInfo.current.userTwoName = playerTwoName;
+        GameInfo.current.SetGameID();
         //If the first in the array is not the enemy then it must be the player   
         if (parts[0].ParticipantId != enemyParticipant.ParticipantId)
         {
@@ -201,6 +206,7 @@ public class GameData : MonoBehaviour {
         //Setting the choices of players dependant on who is keeping track
         if (GameInfo.current.isKeepingTrack)
         {
+            SetNames();
             RoundInfo.current.userTwoMiniGameChoice = type.ToString();
         }
         else
@@ -233,13 +239,18 @@ public class GameData : MonoBehaviour {
                 break;
         }
         //Setting the choices of players dependant on who is keeping track
+
+        Debug.Log("Check track?????????????????????????????????????????????????????");
         if (GameInfo.current.isKeepingTrack)
         {
+            SetNames();
+            Debug.Log("Keeping track");
             RoundInfo.current.userOneMiniGameChoice = type.ToString();
         }
         else
         {
             RoundInfo.current.userTwoMiniGameChoice = type.ToString();
+            Debug.Log("Not Keeping track");
         }
         CheckChoices();
     }

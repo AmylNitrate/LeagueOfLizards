@@ -26,8 +26,9 @@ public class ResultsUI : MonoBehaviour {
         if (GameInfo.current == null)
         {
             Debug.Log("Creating new GameInfo=========================================================================>>>>>>>>> ");
+            GameInfo.current = new GameInfo();
             GameData.instance.SetNames();
-            GameInfo.current = new GameInfo(GameData.instance.playerOneName, GameData.instance.playerTwoName);
+            Debug.Log(GameData.instance.playerOneName);
             Debug.Log("GameInfo created =========================================================================>>>>>>>>>");
         }
         //Otherwise create a new round after finalising the last one

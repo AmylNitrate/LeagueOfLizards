@@ -54,6 +54,11 @@ public class GameInfo {
         }
     }
 
+    public void SetGameID()
+    {
+        UniqueRoundID = userOne + "_" + userTwo + "_" + timeStarted;
+    }
+
     /// <summary>
     /// Creates a new RoundInfo object and adds it to the list
     /// </summary>
