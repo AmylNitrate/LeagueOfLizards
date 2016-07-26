@@ -7,6 +7,7 @@ public class GameInfo {
 
     public static GameInfo current;
 
+    [JsonIgnore]
     public bool isKeepingTrack;
 
     public string UniqueRoundID, userOne, userTwo, timeStarted, date;
