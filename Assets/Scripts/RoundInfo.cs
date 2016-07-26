@@ -21,8 +21,6 @@ public class RoundInfo {
 
         //Ints
         roundNumber = GameData.instance.roundsPlayed;
-        userOneMiniGameScore = 0;
-        userTwoMiniGameScore = 0;
 
         //Add to list
         //GameInfo.current.roundData.Add(current);
@@ -51,5 +49,16 @@ public class RoundInfo {
             isSetup = true;
         }
         Debug.Log("Populated");
+    }
+
+    /// <summary>
+    /// Assign minigame points
+    /// </summary>
+    /// <param name="playerOnePoints">The first players points</param>
+    /// <param name="playerTwoPoints">The second players points</param>
+    public void AssignPoints(int playerOnePoints, int playerTwoPoints)
+    {
+        userOneMiniGameScore = playerOnePoints;
+        userTwoMiniGameScore = playerTwoPoints;
     }
 }

@@ -97,7 +97,6 @@ public class MiniGameTracker : MonoBehaviour {
         {
             RoundInfo.current.miniGameWinner = "Draw";
         }
-        GameInfo.current.NextRound();
     }
 
     /// <summary>
@@ -146,7 +145,6 @@ public class MiniGameTracker : MonoBehaviour {
         {
             RoundInfo.current.miniGameWinner = "Draw";
         }
-        GameInfo.current.NextRound();
     }
 
     /// <summary>
@@ -193,7 +191,6 @@ public class MiniGameTracker : MonoBehaviour {
         {
             RoundInfo.current.miniGameWinner = "Draw";
         }
-        GameInfo.current.NextRound();
         //Game is over at this point
         //Display name on MultiplayerMenu and have both users exit the room
     }
