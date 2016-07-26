@@ -19,7 +19,7 @@ public class GameInfo {
         userOne = userOneID;
         userTwo = userTwoID;
         Debug.Log(userOne);
-        timeStarted = Time.time.ToString();
+        timeStarted = System.DateTime.Now.ToString();
         date = System.DateTime.Now.ToString();
         UniqueRoundID = userOne + "_" + userTwo + "_" + timeStarted;
         Debug.Log("GameInfo: " + UniqueRoundID);
@@ -32,7 +32,7 @@ public class GameInfo {
         Debug.Log("GameInfo Constructor called");
         userOne = "";
         userTwo = "";
-        timeStarted = Time.time.ToString();
+        timeStarted = System.DateTime.Now.ToString();
         date = System.DateTime.Now.ToString();
         UniqueRoundID = userOne + "_" + userTwo + "_" + timeStarted;
         //Create first round info entry
