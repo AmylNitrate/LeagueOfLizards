@@ -32,7 +32,7 @@ public class ResultsUI : MonoBehaviour {
             Debug.Log("GameInfo created =========================================================================>>>>>>>>>");
         }
         //Otherwise create a new round after finalising the last one
-        else
+        else if (GameInfo.current != null && !MiniGameTracker.instance.fought)
         {
             //FUNCTION TO FINALISE ROUNDINFO DATA
             //SEND OFF ROUNDINFO
