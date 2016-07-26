@@ -15,15 +15,15 @@ public class GameInfo {
 
     public GameInfo(string userOneID, string userTwoID)
     {
-        Debug.Log("GameInfo Constructor called");
         userOne = userOneID;
         userTwo = userTwoID;
+        Debug.Log(userOne);
         timeStarted = Time.time.ToString();
         date = System.DateTime.Now.ToString();
         UniqueRoundID = userOne + "_" + userTwo + "_" + timeStarted;
+        Debug.Log("GameInfo: " + UniqueRoundID);
         //Create first round info entry
-        //NextRound();
-        RoundInfo.current = new RoundInfo();
+        NextRound();
     }
 
     public GameInfo()
@@ -35,8 +35,7 @@ public class GameInfo {
         date = System.DateTime.Now.ToString();
         UniqueRoundID = userOne + "_" + userTwo + "_" + timeStarted;
         //Create first round info entry
-        //NextRound();
-        //RoundInfo.current = new RoundInfo();
+        NextRound();
     }
 
     /// <summary>

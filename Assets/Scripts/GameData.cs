@@ -24,7 +24,7 @@ public class GameData : MonoBehaviour {
     public int myCurrentRHP, enemyCurrentRHP;
 
     //Enemy name
-    public string enemyName;
+    public string enemyName, playerOneName, playerTwoName;
 
     //Number of rounds played
     public int roundsPlayed = 0;
@@ -37,6 +37,9 @@ public class GameData : MonoBehaviour {
 
     //The two choices for the local player and the enemy that is selected on the results UI screen
     RoundTypes enemyChoice, myChoice;
+
+    //List of participants
+    List<Participant> parts = new List<Participant>();
 
     void Awake()
     {
@@ -61,29 +64,28 @@ public class GameData : MonoBehaviour {
         //Gets round info for the dictionary
         PopDictionary();
         //Getting the participant ID of the player's opponent
-        Participant[] parts = new Participant[2];
         int i = 0;
-        foreach (Participant part in MultiplayerController.Instance.GetAllPlayers())
-        {
-            if (part.ParticipantId != MultiplayerController.Instance.GetParticipantID())
-            {
-                enemyParticipant = part;
-            }
-            parts[i] = part;
-            i++;
-        }
         //Read from save file
         myCurrentRHP = Lizard.current.myRHPRemaining;
         Debug.Log("My current RHP = " + myCurrentRHP);
         //enemyCurrentRHP = 
         //Set current round
         currentRoundValue = roundValues[RoundTypes.Assess];
-        //Create the game info tracking object
-        Debug.Log("Creating new GameInfo=========================================================================>>>>>>>>> " + i);
-        //GameInfo.current = new GameInfo(parts[0].DisplayName, parts[1].DisplayName);
-        GameInfo.current = new GameInfo();
-        Debug.Log("GameInfo created =========================================================================>>>>>>>>>");
-        //If the first in the array is not the enemy then it must be the player
+    }
+
+    public void SetNames()
+    {
+        parts = MultiplayerController.Instance.GetAllPlayers();
+        foreach (Participant part in parts)
+        {
+            if (part.ParticipantId != MultiplayerController.Instance.GetParticipantID())
+            {
+                enemyParticipant = part;
+            }
+        }
+        playerOneName = parts[0].DisplayName;
+        playerTwoName = parts[1].DisplayName;
+        //If the first in the array is not the enemy then it must be the player   
         if (parts[0].ParticipantId != enemyParticipant.ParticipantId)
         {
             //Therefore the local user will be the one keeping track of the information
@@ -194,6 +196,7 @@ public class GameData : MonoBehaviour {
     /// <param name="type"></param>
     public void SetEnemyChoice(RoundTypes type)
     {
+        RoundInfo.current.PopulateFromGameInfo();
         enemyChoice = type;
         //Setting the choices of players dependant on who is keeping track
         if (GameInfo.current.isKeepingTrack)

@@ -22,6 +22,21 @@ public class ResultsUI : MonoBehaviour {
         //Sets the RHP values for the first time
         playerRHP.text = GameData.instance.myCurrentRHP.ToString();
         opponentRHP.text = "???";
+        //If there is no GameInfo already create a new one
+        if (GameInfo.current == null)
+        {
+            Debug.Log("Creating new GameInfo=========================================================================>>>>>>>>> ");
+            GameData.instance.SetNames();
+            GameInfo.current = new GameInfo(GameData.instance.playerOneName, GameData.instance.playerTwoName);
+            Debug.Log("GameInfo created =========================================================================>>>>>>>>>");
+        }
+        //Otherwise create a new round after finalising the last one
+        else
+        {
+            //FUNCTION TO FINALISE ROUNDINFO DATA
+            //SEND OFF ROUNDINFO
+            RoundInfo.current = new RoundInfo();
+        }
     }
 
     void Start()
