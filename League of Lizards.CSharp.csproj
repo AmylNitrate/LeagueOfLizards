@@ -283,7 +283,9 @@
     <Compile Include="Assets\MultiplayerController.cs" />
     <Compile Include="Assets\Scripts\GameData.cs" />
     <Compile Include="Assets\Scripts\GameInfo.cs" />
-    <Compile Include="Assets\Scripts\GameSparksManager.cs" />
+    <Compile Include="Assets\Scripts\GameSparksStuff\GameSparksManager.cs" />
+    <Compile Include="Assets\Scripts\GameSparksStuff\LoginPanel.cs" />
+    <Compile Include="Assets\Scripts\GameSparksStuff\RegistrationPanel.cs" />
     <Compile Include="Assets\Scripts\Lizard.cs" />
     <Compile Include="Assets\Scripts\LizardCreationController.cs" />
     <Compile Include="Assets\Scripts\MainMenu.cs" />

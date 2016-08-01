@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using GameSparks.Api.Requests;
 
 public class GameInfo {
 
@@ -47,7 +48,20 @@ public class GameInfo {
         if (isKeepingTrack)
         {
             //Send the information to GameSparks
-            CreateJSON();
+            LogEventRequest request = new LogEventRequest();
+            request.SetEventKey("saveMatchData");
+            request.SetEventAttribute("info", CreateJSON());
+            request.Send((response) =>
+            {
+                if (!response.HasErrors)
+                {
+                    Debug.Log("Successfully sent data");
+                }
+                else
+                {
+                    Debug.Log("Data not successfully sent");
+                }
+            });
         }
         else
         {
