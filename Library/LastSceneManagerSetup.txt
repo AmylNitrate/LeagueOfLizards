@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Horizontal/LizardCreation.unity
+- path: Assets/LoginGS.unity
   isLoaded: 1
   isActive: 1

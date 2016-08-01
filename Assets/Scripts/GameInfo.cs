@@ -48,10 +48,7 @@ public class GameInfo {
         if (isKeepingTrack)
         {
             //Send the information to GameSparks
-            LogEventRequest request = new LogEventRequest();
-            request.SetEventKey("saveMatchData");
-            request.SetEventAttribute("info", CreateJSON());
-            request.Send((response) =>
+            new LogEventRequest().SetEventKey("saveMatchData").SetEventAttribute("info", CreateJSON()).Send((response) =>
             {
                 if (!response.HasErrors)
                 {
@@ -59,7 +56,7 @@ public class GameInfo {
                 }
                 else
                 {
-                    Debug.Log("Data not successfully sent");
+                    Debug.Log("Data not successfully sent: " + response.Errors.ToString());
                 }
             });
         }
