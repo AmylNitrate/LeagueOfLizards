@@ -20,9 +20,9 @@ namespace GameSparks.Platforms
 		virtual protected void Start()
 		{
 
-			DeviceName = SystemInfo.deviceName.ToString();
-			DeviceType = SystemInfo.deviceType.ToString();
-			DeviceId = SystemInfo.deviceUniqueIdentifier.ToString();
+			//DeviceName = SystemInfo.deviceName.ToString();
+			//DeviceType = SystemInfo.deviceType.ToString();
+			//DeviceId = SystemInfo.deviceUniqueIdentifier.ToString();
             #if !GS_DONT_USE_PLAYER_PREFS
             AuthToken = PlayerPrefs.GetString(PLAYER_PREF_AUTHTOKEN_KEY);
 			UserId = PlayerPrefs.GetString(PLAYER_PREF_USERID_KEY);

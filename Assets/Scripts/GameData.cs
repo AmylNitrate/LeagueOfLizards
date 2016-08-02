@@ -277,6 +277,7 @@ public class GameData : MonoBehaviour {
                     ResultsUI.instance.runAwayPanelValue.text = "Your enemy has run away\n\nYou have won";
                     MiniGameTracker.instance.GiveXP(50);
                 }
+                RoundInfo.current.miniGameOutcome = "Run Away";
                 GameInfo.current.SendToGameSparks();
             }
             //If both choices match then load the correct scene
@@ -315,17 +316,17 @@ public class GameData : MonoBehaviour {
         if (myChoice == RoundTypes.Assess)
         {
             UIManager.instance.GoToLevel("RoundOne");
-            Lizard.current.TakeAwayRHP(5);
+            Lizard.current.TakeAwayRHP(Lizard.current.CostRHP(5));
         }
         if (myChoice == RoundTypes.Escalate)
         {
             UIManager.instance.GoToLevel("RoundTwo");
-            Lizard.current.TakeAwayRHP(10);
+            Lizard.current.TakeAwayRHP(Lizard.current.CostRHP(10));
         }
         if (myChoice == RoundTypes.Fight)
         {
             UIManager.instance.GoToLevel("RoundThree");
-            Lizard.current.TakeAwayRHP(20);
+            Lizard.current.TakeAwayRHP(Lizard.current.CostRHP(20));
         }
         enemyChoice = RoundTypes.none;
         myChoice = RoundTypes.none;

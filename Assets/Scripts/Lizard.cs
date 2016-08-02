@@ -95,7 +95,7 @@ public class Lizard{
     void AddDurablePoint()
     {
         durablePoints++;
-        actionCostModifier *= 0.95f;
+        actionCostModifier -= 0.05f;
     }
 
     /// <summary>
@@ -158,6 +158,12 @@ public class Lizard{
         Debug.Log(experiencePoints + " experience points");
         SaveLoad.Save();
         CheckForLevel();
+    }
+
+    public int CostRHP(int val)
+    {
+        Debug.Log("Before mod = " + val + " and after mod = " + Mathf.RoundToInt(val * actionCostModifier));
+        return Mathf.RoundToInt(val * actionCostModifier);
     }
 
     public void CheckForLevel()
