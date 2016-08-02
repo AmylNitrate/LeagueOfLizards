@@ -277,8 +277,9 @@ public class GameData : MonoBehaviour {
                     ResultsUI.instance.runAwayPanelValue.text = "Your enemy has run away\n\nYou have won";
                     MiniGameTracker.instance.GiveXP(50);
                 }
-                RoundInfo.current.miniGameOutcome = "Run Away";
+                RoundInfo.current.miniGameOutcome = "RunAway";
                 GameInfo.current.SendToGameSparks();
+                GameInfo.current = null;
             }
             //If both choices match then load the correct scene
             else if (enemyChoice == myChoice)

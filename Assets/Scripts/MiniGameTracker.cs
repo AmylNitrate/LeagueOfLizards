@@ -219,6 +219,7 @@ public class MiniGameTracker : MonoBehaviour {
             Lizard.current.GiveXP(50, false);
         }
         GameInfo.current.SendToGameSparks();
+        GameInfo.current = null;
     }
 
     public void GiveXP(int i)
