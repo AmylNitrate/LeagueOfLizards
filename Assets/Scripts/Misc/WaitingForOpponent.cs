@@ -6,6 +6,9 @@ public class WaitingForOpponent : MonoBehaviour {
 
     Text myText;
 
+    [SerializeField]
+    string myString = "Waiting for opponent";
+
     void Awake()
     {
         myText = GetComponent<Text>();
@@ -15,11 +18,11 @@ public class WaitingForOpponent : MonoBehaviour {
     IEnumerator ChangeText()
     {
         yield return new WaitForSeconds(0.3f);
-        myText.text = "Waiting for opponent..";
+        myText.text = myString + "..";
         yield return new WaitForSeconds(0.3f);
-        myText.text = "Waiting for opponent...";
+        myText.text = myString + "...";
         yield return new WaitForSeconds(0.3f);
-        myText.text = "Waiting for opponent.";
+        myText.text = myString + ".";
         StartCoroutine(ChangeText());
     }
 }

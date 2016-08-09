@@ -6,17 +6,40 @@ public class GameSparksManager : MonoBehaviour {
 
     public static GameSparksManager instance = null;
 
+    [SerializeField]
+    GameObject otherAuthenticateOptions, pleaseWaitText;
+
     void Awake()
     {
         if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(this.gameObject);
+            TryDeviceAuthenticate();
         }
         else
         {
             Destroy(this.gameObject);
         }
+    }
+
+    void TryDeviceAuthenticate()
+    {
+        Debug.Log("Attempting device authentication");
+        new GameSparks.Api.Requests.AuthenticationRequest().SetPassword("temp").SetUserName("temp").Send((response) =>
+        {
+            if (!response.HasErrors)
+            {
+                Debug.Log("Authenticated successfully");
+                SceneManager.LoadScene(1);
+            }
+            else
+            {
+                Debug.Log("Error when authenticating");
+                otherAuthenticateOptions.SetActive(true);
+                pleaseWaitText.SetActive(false);
+            }
+        });
     }
 
     /// <summary>
