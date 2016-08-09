@@ -45,13 +45,13 @@ public class Dewlap : MonoBehaviour
             {
                 GameOver();
             }
-
-            if (dewlap.transform.position.x < 1.8)
+            
+            if (dewlap.transform.localPosition.x >= 0.087f)
             {
-                dewlap.transform.Translate((float)-0.01, (float)0.01, 0);
+                dewlap.transform.Translate((float)-0.005, (float)0.005, 0);
             }
 
-            if (Input.GetMouseButtonDown(0) && dewlap.transform.position.x > 1.4)
+            if (Input.GetMouseButtonDown(0) && dewlap.transform.localPosition.x < 0.0921f)
             {
                 //Data.control.energy--;
                 RaycastHit hit;

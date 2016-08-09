@@ -102,6 +102,8 @@ public class ResultsUI : MonoBehaviour {
         {
             opponentRHP.text = "0 - " + rangeMax.ToString();
         }
+        OpponentRHPRange.instance.SetPositions(rangeMin, rangeMax);
+        OpponentRHPRange.instance.SetOwnPosition(GameData.instance.myCurrentRHP);
     }
 
     /// <summary>

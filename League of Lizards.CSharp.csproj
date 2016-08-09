@@ -310,6 +310,7 @@
     <Compile Include="Assets\Scripts\SaveLoad.cs" />
     <Compile Include="Assets\Scripts\SaveToGameSparks.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\MiniGMenuUI.cs" />
+    <Compile Include="Assets\Scripts\UI Scripts\OpponentRHPRange.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\RetainedUserPicksScript.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\StatMenuUI.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\UIManager.cs" />
